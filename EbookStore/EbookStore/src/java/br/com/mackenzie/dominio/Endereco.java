@@ -18,7 +18,7 @@ import javax.persistence.TableGenerator;
  *
  * @author 71306579
  */
-@TableGenerator(name="endereo_seq",table="sequences", 
+@TableGenerator(name="endereco_seq",table="sequences", 
         pkColumnName="seq_nome",pkColumnValue="seq_endereco", 
         valueColumnName="seq_valor")
 @Entity

@@ -9,12 +9,14 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 /**
  *
  * @author 71306579
  */
 @Entity
+@Table(name="tb_pessoa")
 @PrimaryKeyJoinColumn(name="id")
 public class Pessoa extends Usuario{
     

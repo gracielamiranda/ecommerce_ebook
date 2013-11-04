@@ -25,7 +25,7 @@ import javax.persistence.TableGenerator;
 @Table(name="tb_autor")
 public class Autor implements Serializable{
     
-     @Id
+    @Id
     @GeneratedValue(strategy= GenerationType.TABLE, generator="autor_seq")
     private int id;
     

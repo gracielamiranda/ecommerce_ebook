@@ -21,9 +21,7 @@ public class AutorService {
     private EntityManager entityManager;
     
     public void inserir(Autor autor){
-        Genero genero = new Genero();
-        genero.setNome("Romance");
-        entityManager.persist(genero);
+        entityManager.persist(autor);
     }
     public List<Autor> listarAutores(){
         

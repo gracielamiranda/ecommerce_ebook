@@ -6,6 +6,7 @@
 
 package br.com.mackenzie.beans;
 
+import br.com.mackenzie.dominio.Autor;
 import br.com.mackenzie.service.AutorService;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -18,7 +19,9 @@ import javax.faces.bean.ManagedBean;
 public class InicioManagedBean {
 
     @EJB
-    AutorService autorService ;
+    private AutorService autorService ;
+    private String nomeAutor;
+    
     /**
      * Creates a new instance of InicioManagedBean
      */
@@ -26,9 +29,21 @@ public class InicioManagedBean {
     }
     
     public void inserir(){
-        autorService.inserir(null);
+        Autor autor = new Autor();
+        autor.setNome(nomeAutor);
+        autorService.inserir(autor);
     }
     public void  listarTodos(){
         autorService.listarAutores();
     }
+
+    public String getNomeAutor() {
+        return nomeAutor;
+    }
+
+    public void setNomeAutor(String nomeAutor) {
+        this.nomeAutor = nomeAutor;
+    }
+    
+    
 }
