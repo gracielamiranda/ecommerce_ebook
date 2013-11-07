@@ -4,39 +4,33 @@
  */
 package br.com.mackenzie.dominio;
 
-import java.util.List;
+import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
 
-/**
- *
- * @author 71306579
- */
+@TableGenerator(name="pessoa_seq",table="sequences", 
+        pkColumnName="seq_nome",pkColumnValue="seq_pessoa", 
+        valueColumnName="seq_valor")
 @Entity
 @Table(name="tb_pessoa")
-@PrimaryKeyJoinColumn(name="id")
-public class Pessoa extends Usuario{
-    
+@Inheritance(strategy= InheritanceType.JOINED)
+public abstract class Pessoa implements Serializable{
+  
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE,generator = "pessoa_seq")
+    private int id;
     private String cpf;
     private String telefone;
-    
     @ManyToOne
     private Endereco endereco;
-
-    @OneToMany(mappedBy="pessoa")
-    private List<Compra> compras; 
-
-    public List<Compra> getCompras() {
-        return compras;
-    }
-
-    public void setCompras(List<Compra> compras) {
-        this.compras = compras;
-    }
-
     
     public String getCpf() {
         return cpf;
@@ -53,7 +47,7 @@ public class Pessoa extends Usuario{
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
+    
     public Endereco getEndereco() {
         return endereco;
     }
@@ -61,6 +55,4 @@ public class Pessoa extends Usuario{
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-        
-   
 }

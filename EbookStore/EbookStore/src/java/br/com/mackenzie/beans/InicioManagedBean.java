@@ -6,8 +6,8 @@
 
 package br.com.mackenzie.beans;
 
+import br.com.mackenzie.dao.GeneroDAO;
 import br.com.mackenzie.dominio.Autor;
-import br.com.mackenzie.service.AutorService;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -19,7 +19,7 @@ import javax.faces.bean.ManagedBean;
 public class InicioManagedBean {
 
     @EJB
-    private AutorService autorService ;
+    private GeneroDAO generoDAO;
     private String nomeAutor;
     
     /**
@@ -29,12 +29,10 @@ public class InicioManagedBean {
     }
     
     public void inserir(){
-        Autor autor = new Autor();
-        autor.setNome(nomeAutor);
-        autorService.inserir(autor);
+        
     }
     public void  listarTodos(){
-        autorService.listarAutores();
+        
     }
 
     public String getNomeAutor() {

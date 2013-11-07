@@ -24,23 +24,31 @@ import javax.persistence.TemporalType;
 @Table(name="tb_compra")
 public class Compra implements Serializable{
     @Id
-    @JoinColumn(name="id")
+    private int id;
+    
     @ManyToOne
-    private Pessoa pessoa;
+    private Usuario usuario;
     
     @Column(name="data_compra")
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataCompra;
 
-
-
-    public Pessoa getPessoa() {
-        return pessoa;
+    public int getId() {
+        return id;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setId(int id) {
+        this.id = id;
     }
+    
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 
     public Calendar getDataCompra() {
         return dataCompra;

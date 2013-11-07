@@ -162,6 +162,4 @@ public class Livro implements Serializable{
     public void setEstoqueLivro(EstoqueLivro estoqueLivro) {
         this.estoqueLivro = estoqueLivro;
     }
-    
-    
 }
