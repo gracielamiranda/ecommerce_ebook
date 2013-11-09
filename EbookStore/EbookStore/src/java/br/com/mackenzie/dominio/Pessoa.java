@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.mackenzie.dominio;
 
 import java.io.Serializable;
@@ -11,8 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
@@ -22,15 +16,41 @@ import javax.persistence.TableGenerator;
 @Entity
 @Table(name="tb_pessoa")
 @Inheritance(strategy= InheritanceType.JOINED)
-public abstract class Pessoa implements Serializable{
+public class Pessoa implements Serializable{
   
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE,generator = "pessoa_seq")
     private int id;
+    private String nomeCompleto;
     private String cpf;
     private String telefone;
-    @ManyToOne
-    private Endereco endereco;
+    private String email;
+
+    public Pessoa() {
+    }
+
+    public Pessoa(String nomeCompleto, String cpf, String telefone, String email) {
+        this.nomeCompleto = nomeCompleto;
+        this.cpf = cpf;
+        this.telefone = telefone;
+        this.email = email;
+    }
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
     
     public String getCpf() {
         return cpf;
@@ -47,12 +67,13 @@ public abstract class Pessoa implements Serializable{
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
-    public Endereco getEndereco() {
-        return endereco;
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setEmail(String email) {
+        this.email = email;
     }
+    
 }

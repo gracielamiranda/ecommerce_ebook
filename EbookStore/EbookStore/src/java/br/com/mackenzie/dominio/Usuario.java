@@ -1,27 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.mackenzie.dominio;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 
-/**
- *
- * @author 71306579
- */
 
 @TableGenerator(name="usuario_seq",table="sequences", 
         pkColumnName="seq_nome",pkColumnValue="seq_usuario", 
@@ -30,8 +17,6 @@ import javax.persistence.TableGenerator;
 @Table(name="tb_usuario")
 @PrimaryKeyJoinColumn(name="id")
 public class Usuario extends Pessoa implements Serializable{
-
-    private String nome;
     
     private String login;
     
@@ -45,14 +30,19 @@ public class Usuario extends Pessoa implements Serializable{
     @Enumerated
     private Perfil perfil;
 
-    public String getNome() {
-        return nome;
+    public Usuario(String login, String senha, Perfil perfil) {
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Usuario(String login, String senha, Perfil perfil, String nomeCompleto, String cpf, String telefone, String email) {
+        super(nomeCompleto, cpf, telefone, email);
+        this.login = login;
+        this.senha = senha;
+        this.perfil = perfil;
     }
-
+    
     public String getLogin() {
         return login;
     }
