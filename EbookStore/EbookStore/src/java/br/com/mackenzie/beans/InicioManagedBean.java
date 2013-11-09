@@ -7,7 +7,10 @@
 package br.com.mackenzie.beans;
 
 import br.com.mackenzie.dao.GeneroDAO;
+import br.com.mackenzie.dao.UsuarioDAO;
 import br.com.mackenzie.dominio.Autor;
+import br.com.mackenzie.dominio.Usuario;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -19,16 +22,17 @@ import javax.faces.bean.ManagedBean;
 public class InicioManagedBean {
 
     @EJB
-    private GeneroDAO generoDAO;
+    private UsuarioDAO usuarioDAO;
     private String nomeAutor;
     
-    /**
-     * Creates a new instance of InicioManagedBean
-     */
     public InicioManagedBean() {
     }
     
     public void inserir(){
+        Usuario usuario = new Usuario("luizoscar.lima@gmail.com", "123456", Usuario.Perfil.CLIENTE, "luiz oscar lemos de lima", "05388077411", "954310462");
+        usuarioDAO.inserir(usuario);
+        
+        Usuario usuarioAutenticado = usuarioDAO.obter("luizoscar.lima@gmail.com", "123456");
         
     }
     public void  listarTodos(){

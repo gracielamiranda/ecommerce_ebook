@@ -28,12 +28,4 @@ public class PessoaDAO extends AbstractDAO<Pessoa> {
         
         return query.getResultList();
     }
-    
-    public Pessoa obterPorEmail(String email){
-        Query query = em.createQuery("SELECT p FROM Pessoa p WHERE p.email = :email");
-        query.setParameter("email",email);
-        
-        return (Pessoa)query.getSingleResult();
-    }
-    
 }

@@ -18,7 +18,7 @@ import javax.persistence.TableGenerator;
 @PrimaryKeyJoinColumn(name="id")
 public class Usuario extends Pessoa implements Serializable{
     
-    private String login;
+    private String email;
     
     private String senha;
     
@@ -33,27 +33,28 @@ public class Usuario extends Pessoa implements Serializable{
     public Usuario(){
         
     }
-    public Usuario(String login, String senha, Perfil perfil) {
-        this.login = login;
+
+    public Usuario(String email, String senha, Perfil perfil) {
+        this.email = email;
         this.senha = senha;
         this.perfil = perfil;
     }
 
-    public Usuario(String login, String senha, Perfil perfil, String nomeCompleto, String cpf, String telefone, String email) {
-        super(nomeCompleto, cpf, telefone, email);
-        this.login = login;
+    public Usuario(String email, String senha, Perfil perfil, String nomeCompleto, String cpf, String telefone) {
+        super(nomeCompleto, cpf, telefone);
+        this.email = email;
         this.senha = senha;
         this.perfil = perfil;
     }
     
-    public String getLogin() {
-        return login;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
+    
     public String getSenha() {
         return senha;
     }
