@@ -1,20 +1,35 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package br.com.mackenzie.dao;
 
+import br.com.mackenzie.dominio.Genero;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
-/**
- *
- * @author luizoscar.lima
- */
 @Stateless
-public class GeneroDAO {
+public class GeneroDAO extends AbstractDAO<Genero>{
+   @PersistenceContext(unitName = "EbookStorePU")
+    private EntityManager em;
 
-    // Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Business Method")
+    public GeneroDAO() {
+        super(Genero.class);
+    }
+
+    @Override
+    protected EntityManager getEntityManager() {
+        return em;
+    }
+
+    
+    public List<Genero> obterPorNome(String nome){
+        Query query = em.createQuery("SELECT g FROM Genero g WHERE LOWER(g.nome) LIKE LOWER(:nome)");
+        query.setParameter("nome","%" + nome + "%");
+        
+        return query.getResultList();
+    }
+
+    
+ 
 }
