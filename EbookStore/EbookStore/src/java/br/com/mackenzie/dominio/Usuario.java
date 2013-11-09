@@ -30,6 +30,9 @@ public class Usuario extends Pessoa implements Serializable{
     @Enumerated
     private Perfil perfil;
 
+    public Usuario(){
+        
+    }
     public Usuario(String login, String senha, Perfil perfil) {
         this.login = login;
         this.senha = senha;
