@@ -58,6 +58,19 @@ public class Livro implements Serializable{
     
     @OneToOne
     private EstoqueLivro estoqueLivro;
+
+    public Livro() {
+    }
+
+    
+    public Livro(String titulo, int qtdePagina, String idioma, String descricao, double preco, int qtdeVendida) {
+        this.titulo = titulo;
+        this.qtdePagina = qtdePagina;
+        this.idioma = idioma;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.qtdeVendida = qtdeVendida;
+    }
     
     public int getId() {
         return id;

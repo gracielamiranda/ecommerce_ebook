@@ -6,15 +6,12 @@
 
 package br.com.mackenzie.beans;
 
-import br.com.mackenzie.dao.UsuarioDAO;
-import br.com.mackenzie.dominio.Usuario;
-import br.com.mackenzie.dominio.enumeracoes.Perfil;
+import br.com.mackenzie.dao.LivroDAO;
+import br.com.mackenzie.dominio.Livro;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -25,24 +22,27 @@ import javax.servlet.http.HttpSession;
 public class InicioManagedBean {
 
     @EJB
-    private UsuarioDAO usuarioDAO;
+    private LivroDAO livroDAO;
     private String nomeAutor;
     
     public InicioManagedBean() {
+        
     }
     
     public void inserir(){
+        Livro livro = new Livro("Chico bento", 100, "Ingles", "um livro muito legal", 29.90, 30);
+        Livro livro1 = new Livro("Turma da monica", 100, "Ingles", "um livro muito legal", 29.90, 2);
+        Livro livro2 = new Livro("Os coisas", 100, "Ingles", "um livro muito legal", 29.90, 100);
+        Livro livro3 = new Livro("Xando o Filme", 100, "Ingles", "um livro muito legal", 29.90, 0);
+        Livro livro4 = new Livro("Vc eh doida demais", 100, "Ingles", "um livro muito legal", 29.90, 0);
         
-        Usuario usuario = new Usuario("luizoscar.lima@gmail.com", "123456", Perfil.Cliente, "luiz oscar lemos de lima", "05388077411", "954310462");
-        usuarioDAO.inserir(usuario);
+        livroDAO.inserir(livro);
+        livroDAO.inserir(livro1);
+        livroDAO.inserir(livro2);
+        livroDAO.inserir(livro3);
+        livroDAO.inserir(livro4);
         
-        Usuario usuarioAutenticado = usuarioDAO.obter("luizoscar.lima@gmail.com", "123456");
-        
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
-        HttpSession session = request.getSession();
-        
-        
+        List<Livro> livros = livroDAO.obterLivrosOrdenados(0, 10, "titulo", "DESC");
     }
     public void  listarTodos(){
         

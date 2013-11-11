@@ -7,13 +7,17 @@
 package br.com.mackenzie.dao;
 
 import br.com.mackenzie.dominio.Livro;
+import br.com.mackenzie.dominio.Livro_;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import org.hibernate.Criteria;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -59,6 +63,27 @@ public class LivroDAO extends AbstractDAO<Livro>{
         return query.getResultList();
     }
     
+    public List<Livro> obterLivrosOrdenados(int primeiroResultado,int resultadoMaximo,String campoOrdenacao,String criterioOrdenacao){
+        Query query = em.createQuery("SELECT l FROM Livro l ORDER BY l." + campoOrdenacao + " " + criterioOrdenacao);
+        query.setFirstResult(primeiroResultado);
+        query.setMaxResults(resultadoMaximo);
+        
+        return query.getResultList();
+    }
+    
+    public List<Livro> obterPorFiltro(Livro livro) throws ClassNotFoundException{
+        CriteriaBuilder criBuilder = em.getCriteriaBuilder();
+        CriteriaQuery<Livro> query = criBuilder.createQuery(Livro.class);
+        Root<Livro> l = query.from(Livro.class);
+        List<Predicate> conditions =  new ArrayList<Predicate>();
+        
+        if(livro.getTitulo() != null && livro.getTitulo().isEmpty()) {
+            conditions.add(criBuilder.like(l.get(Livro_.titulo),livro.getTitulo()));
+        }
+        
+        return null;
+        //ParameterExpression<Object> param = 
+    }
     
     @Override
     protected EntityManager getEntityManager() {
