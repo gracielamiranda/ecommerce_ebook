@@ -1,5 +1,6 @@
 package br.com.mackenzie.dominio;
 
+import br.com.mackenzie.dominio.enumeracoes.Perfil;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -24,8 +25,6 @@ public class Usuario extends Pessoa implements Serializable{
     
     @OneToMany(mappedBy="usuario")
     private List<Compra> compras; 
-        
-    public enum Perfil {ADMINISTRADOR,CLIENTE};
     
     @Enumerated
     private Perfil perfil;

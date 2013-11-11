@@ -6,19 +6,22 @@
 
 package br.com.mackenzie.beans;
 
-import br.com.mackenzie.dao.GeneroDAO;
 import br.com.mackenzie.dao.UsuarioDAO;
-import br.com.mackenzie.dominio.Autor;
 import br.com.mackenzie.dominio.Usuario;
-import java.util.List;
+import br.com.mackenzie.dominio.enumeracoes.Perfil;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author Graciela Miranda
  */
 @ManagedBean
+@SessionScoped
 public class InicioManagedBean {
 
     @EJB
@@ -29,10 +32,16 @@ public class InicioManagedBean {
     }
     
     public void inserir(){
-        Usuario usuario = new Usuario("luizoscar.lima@gmail.com", "123456", Usuario.Perfil.CLIENTE, "luiz oscar lemos de lima", "05388077411", "954310462");
+        
+        Usuario usuario = new Usuario("luizoscar.lima@gmail.com", "123456", Perfil.Cliente, "luiz oscar lemos de lima", "05388077411", "954310462");
         usuarioDAO.inserir(usuario);
         
         Usuario usuarioAutenticado = usuarioDAO.obter("luizoscar.lima@gmail.com", "123456");
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest(); 
+        HttpSession session = request.getSession();
+        
         
     }
     public void  listarTodos(){
