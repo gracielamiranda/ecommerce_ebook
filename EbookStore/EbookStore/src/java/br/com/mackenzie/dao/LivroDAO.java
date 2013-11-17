@@ -7,7 +7,6 @@
 package br.com.mackenzie.dao;
 
 import br.com.mackenzie.dominio.Livro;
-import br.com.mackenzie.dominio.Livro_;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -71,19 +70,6 @@ public class LivroDAO extends AbstractDAO<Livro>{
         return query.getResultList();
     }
     
-    public List<Livro> obterPorFiltro(Livro livro) throws ClassNotFoundException{
-        CriteriaBuilder criBuilder = em.getCriteriaBuilder();
-        CriteriaQuery<Livro> query = criBuilder.createQuery(Livro.class);
-        Root<Livro> l = query.from(Livro.class);
-        List<Predicate> conditions =  new ArrayList<Predicate>();
-        
-        if(livro.getTitulo() != null && livro.getTitulo().isEmpty()) {
-            conditions.add(criBuilder.like(l.get(Livro_.titulo),livro.getTitulo()));
-        }
-        
-        return null;
-        //ParameterExpression<Object> param = 
-    }
     
     @Override
     protected EntityManager getEntityManager() {

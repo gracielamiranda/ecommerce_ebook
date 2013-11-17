@@ -1,22 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.mackenzie.beans;
 
 import br.com.mackenzie.dao.LivroDAO;
 import br.com.mackenzie.dominio.Livro;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-/**
- *
- * @author Graciela Miranda
- */
 @ManagedBean
 @SessionScoped
 public class InicioManagedBean {
@@ -42,7 +31,7 @@ public class InicioManagedBean {
         livroDAO.inserir(livro3);
         livroDAO.inserir(livro4);
         
-        List<Livro> livros = livroDAO.obterLivrosOrdenados(0, 10, "titulo", "DESC");
+        
     }
     public void  listarTodos(){
         

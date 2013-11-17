@@ -4,6 +4,12 @@
  */
 package br.com.mackenzie.dominio;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -17,6 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.Transient;
 
 /**
  *
@@ -58,7 +65,9 @@ public class Livro implements Serializable{
     
     @OneToOne
     private EstoqueLivro estoqueLivro;
-
+    
+    @Transient
+    private String capaImagem;
     public Livro() {
     }
 
@@ -175,4 +184,7 @@ public class Livro implements Serializable{
     public void setEstoqueLivro(EstoqueLivro estoqueLivro) {
         this.estoqueLivro = estoqueLivro;
     }
+
+
+    
 }
