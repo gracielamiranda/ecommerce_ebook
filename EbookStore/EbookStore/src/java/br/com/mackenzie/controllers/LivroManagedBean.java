@@ -14,6 +14,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
+import com.google.gson.Gson;
 
 /**
  *
@@ -78,12 +79,16 @@ public class LivroManagedBean {
         this.livroModal = livroModal;
     }
    
-    
     public void buscar(){
         listaLivros = livroDAO.obterPorTitulo(textoBusca);   
     }   
+    
     public void pegaId(int id){
         livroModal = livroDAO.obter(id);
+    }
+    
+    public String transformarObjetoEmJson(Livro livro){
+        return new Gson().toJson(livro);
     }
     
 }

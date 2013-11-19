@@ -10,18 +10,15 @@
         <ui:define name="content">
             <div class="row">
                 <ui:repeat var="livro" value="#{livroManagedBean.listaLivros}">
-                    <div class="col-sm-6 col-md-4">
+                    <div class="col-sm-6 col-md-4 coluna-produtos">
                         <div class="thumbnail">
-                            <h:graphicImage id="imgProduto" library="images" name="ebook.png" width="300px" height="200px" alt="..."  />
+                            <h:graphicImage id="imgProduto" library="images" name="imagem-padrao300x200.png" width="300px" height="200px" alt="..."  />
                             <div class="caption">
                                 <h:outputText value="#{livro.titulo}" /><br />
                                 <h:outputText value="#{livro.preco}"/>
                                 <p>
                                     <a href="#" class="btn btn-primary" role="button">Comprar</a> 
-                                    <h:commandLink action="#{livroManagedBean.pegaId(livro.id)}" class="btn btn-default detalhes-produtos" role="button" value="Detalhes">
-                                        <f:ajax execute="@all" render="@all" />
-                                    </h:commandLink>
-                                    <!--<a href="" class="btn btn-default detalhes-produtos" role="button">Detalhes</a>-->
+                                    <a href="" class="btn btn-default detalhes-produtos" data-item="#{livroManagedBean.transformarObjetoEmJson(livro)}" role="button">Detalhes</a>
                                 </p>
                             </div>
                         </div>
@@ -35,10 +32,10 @@
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">#{livroManagedBean.livroModal.titulo}</h4>
+                    <h4 class="modal-title" id="myModalLabel"></h4>
                   </div>
                   <div class="modal-body">
-                    ...
+                    
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -4,6 +4,10 @@ body {
     font-family: Verdana, "Verdana CE",  Arial, "Arial CE", "Lucida Grande CE", lucida, "Helvetica CE", sans-serif;
     color: #000000;  
     margin: 10px;
+    line-height: 1;
+    width: 1103px;
+    margin-left: 123px;
+    margin-top: 0px;
 }
 
 h1 {
@@ -26,4 +30,9 @@ a:link:hover, a:visited:hover  {
   color: #045491;
   font-weight : bold;
   text-decoration : underline;
+}
+
+.coluna-produtos{
+    width: 280px !important;
+    padding-right: 0px !important;
 }

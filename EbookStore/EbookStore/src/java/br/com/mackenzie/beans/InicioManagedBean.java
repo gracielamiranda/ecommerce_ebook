@@ -19,11 +19,11 @@ public class InicioManagedBean {
     }
     
     public void inserir(){
-        Livro livro = new Livro("Chico bento", 100, "Ingles", "um livro muito legal", 29.90, 30);
-        Livro livro1 = new Livro("Turma da monica", 100, "Ingles", "um livro muito legal", 29.90, 2);
-        Livro livro2 = new Livro("Os coisas", 100, "Ingles", "um livro muito legal", 29.90, 100);
-        Livro livro3 = new Livro("Xando o Filme", 100, "Ingles", "um livro muito legal", 29.90, 0);
-        Livro livro4 = new Livro("Vc eh doida demais", 100, "Ingles", "um livro muito legal", 29.90, 0);
+        Livro livro = new Livro("Chico bento", 100, "Ingles", "um livro muito legal do chico bento", 29.90, 30);
+        Livro livro1 = new Livro("Turma da monica", 100, "Ingles", "um livro muito legal da turma da monica", 29.90, 2);
+        Livro livro2 = new Livro("Os coisas", 100, "Ingles", "um livro muito legal dos coisas", 29.90, 100);
+        Livro livro3 = new Livro("Xando o Filme", 100, "Ingles", "um livro muito legal xando o filme", 29.90, 0);
+        Livro livro4 = new Livro("Vc eh doida demais", 100, "Ingles", "um livro muito legal vc é doida demais", 29.90, 0);
         
         livroDAO.inserir(livro);
         livroDAO.inserir(livro1);
