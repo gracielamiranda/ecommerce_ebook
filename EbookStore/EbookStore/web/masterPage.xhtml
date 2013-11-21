@@ -27,7 +27,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                    <h:commandLink action="index" ><h:graphicImage library="images" name="ebook.png" width="70%"/> </h:commandLink>
+                  <a href="index.xhtml"><h:graphicImage library="images" name="ebook.png" width="70%"/></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -51,11 +51,13 @@
                             <h:commandButton action="#{livroManagedBean.buscar()}" class="btn btn-default" value="buscar" />
                     </div>
                   <ul class="nav navbar-nav navbar-right navegacao-direita">
-                      <li><h:commandLink action="login">Olá #{homeManagedBean.usuario}</h:commandLink></li>
-                      <li><h:commandLink action="carrinho"> 
+                      <li><a href="login.xhtml">Olá #{homeManagedBean.usuario}</a></li>
+                      <li>
+                          <a href="carrinho.xhtml"> 
                             <h:graphicImage library="images" name="carrinho.png" /> 
                             <span class="badge">1</span> 
-                        </h:commandLink></li>
+                          </a>
+                     </li>
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </nav>

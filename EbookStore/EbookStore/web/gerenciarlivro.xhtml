@@ -8,6 +8,7 @@
 
     <ui:define name="content">
         <h:form>
+                    <h:commandButton action="#{inicioManagedBean.inserir()}" value="inserir livros de teste" />
                     <h:inputText id="titulo" value="#{livroManagedBean.livro.titulo}" pt:placeholder="titulo" title="título" />
                     <br/>
                     <h:inputTextarea rows="4" cols="30" id="capa" value="#{livroController.selected.capa}" pt:placeholder="capa" title="#{bundle.CreateLivroTitle_capa}" />
