@@ -20,6 +20,7 @@ h1 {
     color: #D20005;
 }
 
+/*
 a:link, a:visited {
   color: #045491;
   font-weight : bold;
@@ -31,8 +32,62 @@ a:link:hover, a:visited:hover  {
   font-weight : bold;
   text-decoration : underline;
 }
-
+*/
 .coluna-produtos{
     width: 280px !important;
     padding-right: 0px !important;
+}
+
+.link-dropdown{
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.428571429;
+  color: #333333;
+  white-space: nowrap;
+}
+
+.link-dropdown:hover,
+.link-dropdown:focus{
+  color: #262626;
+  text-decoration: none;
+  background-color: #f5f5f5;
+}
+.link-dropdown > .active > a,
+.link-dropdown > .active > a:hover,
+.link-dropdown > .active > a:focus {
+  color: #ffffff;
+  text-decoration: none;
+  background-color: #428bca;
+  outline: 0;
+}
+
+.dropdown-menu > .disabled > a,
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  color: #999999;
+}
+
+.dropdown-menu > .disabled > a:hover,
+.dropdown-menu > .disabled > a:focus {
+  text-decoration: none;
+  cursor: not-allowed;
+  background-color: transparent;
+  background-image: none;
+  filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.busca{
+    margin-top: 22px !important;
+}
+
+.menu-dropdown{
+    margin-top:15px !important;
+    margin-left: -70px !important;
+}
+
+.navegacao-direita
+{
+    margin-top: 13px !important;
 }

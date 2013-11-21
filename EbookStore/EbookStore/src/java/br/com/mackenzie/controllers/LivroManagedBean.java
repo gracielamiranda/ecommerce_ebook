@@ -26,7 +26,7 @@ public class LivroManagedBean {
 
     private List<Livro> listaLivros = new ArrayList<Livro>();
     private String textoBusca;
-    private Livro livroModal;
+    private Livro livro;
     private int primeiroResultado;
     private int resultadoMaximo =10 ;
     @EJB
@@ -35,9 +35,9 @@ public class LivroManagedBean {
      * Creates a new instance of livroManagedBean
      */
     public LivroManagedBean() {
+        this.livro = new Livro();
     }
 
-    
     public List<Livro> getListaLivros() {
       if(listaLivros.isEmpty()){
           listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida","DESC");
@@ -71,20 +71,24 @@ public class LivroManagedBean {
         this.textoBusca = textoBusca;
     }
 
-    public Livro getLivroModal() {
-        return livroModal;
+    public Livro getLivro() {
+        return livro;
     }
 
-    public void setLivroModal(Livro livroModal) {
-        this.livroModal = livroModal;
+    public void setLivro(Livro livro) {
+        this.livro= livro;
+    }
+    
+    public void salvarLivro(){
+        this.livroDAO.inserir(livro);
     }
    
     public void buscar(){
         listaLivros = livroDAO.obterPorTitulo(textoBusca);   
     }   
     
-    public void pegaId(int id){
-        livroModal = livroDAO.obter(id);
+    public void limparLivro(){
+        
     }
     
     public String transformarObjetoEmJson(Livro livro){

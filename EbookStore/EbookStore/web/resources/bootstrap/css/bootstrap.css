@@ -134,7 +134,7 @@ svg:not(:root) {
 figure {
   margin: 0;
 }
-
+/*
 fieldset {
   padding: 0.35em 0.625em 0.75em;
   margin: 0 2px;
@@ -145,7 +145,7 @@ legend {
   padding: 0;
   border: 0;
 }
-
+*/
 button,
 input,
 select,
@@ -1840,7 +1840,7 @@ table th[class*="col-"] {
     border-bottom: 0;
   }
 }
-
+/*
 fieldset {
   padding: 0;
   margin: 0;
@@ -1858,7 +1858,7 @@ legend {
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
-
+*/
 label {
   display: inline-block;
   margin-bottom: 5px;

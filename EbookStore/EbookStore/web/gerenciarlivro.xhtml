@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./masterPage.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+
+    <ui:define name="content">
+        <h:form>
+                    <h:inputText id="titulo" value="#{livroManagedBean.livro.titulo}" pt:placeholder="titulo" title="título" />
+                    <br/>
+                    <h:inputTextarea rows="4" cols="30" id="capa" value="#{livroController.selected.capa}" pt:placeholder="capa" title="#{bundle.CreateLivroTitle_capa}" />
+                    <br/>
+                    <h:inputText id="qtdePagina" value="#{livroManagedBean.livro.qtdePagina}" pt:placeholder="quantidade de páginas" title="#{bundle.CreateLivroTitle_qtdePagina}" />
+                    <br/>
+                    <h:inputText id="idioma" value="#{livroManagedBean.livro.idioma}" pt:placeholder="idioma" title="#{bundle.CreateLivroTitle_idioma}" />
+                    <br/>
+                    <h:inputText id="descricao" value="#{livroManagedBean.livro.descricao}" pt:placeholder="descrição" title="#{bundle.CreateLivroTitle_descricao}" />
+                    <br/>
+                    <h:inputText id="preco" value="#{livroManagedBean.livro.preco}" pt:placeholder="preço" title="#{bundle.CreateLivroTitle_preco}" />
+                    <br/>
+                    <h:outputLabel value="#{bundle.CreateLivroLabel_arquivo}" for="arquivo" />
+                    <h:inputTextarea rows="4" cols="30" id="arquivo" value="#{livroController.selected.arquivo}" title="#{bundle.CreateLivroTitle_arquivo}" />
+                    <br/>
+                    <h:outputLabel value="#{bundle.CreateLivroLabel_editora}" for="editora" />
+                    <h:selectOneMenu id="editora" value="#{editoraManagedBean.listaEditoras}" title="editora" >
+                        <f:selectItems value="#{editoraManagedBean.listNomesEditora}"/>
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:outputLabel value="#{bundle.CreateLivroLabel_genero}" for="genero" />
+                    <h:selectOneMenu id="genero" value="#{livroController.selected.genero}" title="#{bundle.CreateLivroTitle_genero}" >
+                        <f:selectItems value="#{generoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:outputLabel value="#{bundle.CreateLivroLabel_autor}" for="autor" />
+                    <h:selectOneMenu id="autor" value="#{livroController.selected.autor}" title="#{bundle.CreateLivroTitle_autor}" >
+                        <f:selectItems value="#{autorController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <br/>
+                    <h:outputLabel value="#{bundle.CreateLivroLabel_estoqueLivro}" for="estoqueLivro" />
+                    <h:selectOneMenu id="estoqueLivro" value="#{livroController.selected.estoqueLivro}" title="#{bundle.CreateLivroTitle_estoqueLivro}" >
+                        <f:selectItems value="#{estoqueLivroController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                <br />
+                <h:commandButton action="#{livroManagedBean.salvarLivro()}" class="btn btn-default" value="salvar" />
+                <h:commandButton action="#{livroManagedBean.limparLivro()}" class="btn btn-default" value="limpar" />
+            </h:form>
+    </ui:define>
+
+</ui:composition>

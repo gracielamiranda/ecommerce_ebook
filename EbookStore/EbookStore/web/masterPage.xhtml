@@ -32,23 +32,25 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul class="nav navbar-nav" style="margin-top:15px;margin-left: -70px;">
+                  <ul class="nav navbar-nav menu-dropdown">
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Genêro <b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                          <ui:repeat var="item" value="#{homeManagedBean.listaGenero}">
-                              <li><a href="#">#{item.nome}</a></li>
+                          <ui:repeat var="item" value="#{generoManagedBean.listaGeneros}">
+                              <li><a class="link-dropdown" href="#">#{item.nome}</a></li>
+                              <li class="divider"></li>
                           </ui:repeat>
+                          <li><a class="link-dropdown" href="#">mais comprados</a></li>
                       </ul>
                     </li>
                   </ul>
-                    <div class="navbar-form navbar-left" style="margin-top: 22px;">
-                    <div class="form-group">
-                        <h:inputText class="input-text" value="#{livroManagedBean.textoBusca}"  pt:placeholder="Insira o título"/>
+                    <div class="navbar-form navbar-left busca">
+                        <div class="form-group">
+                            <h:inputText class="form-control" value="#{livroManagedBean.textoBusca}"  pt:placeholder="Insira o título"/>
+                        </div>
+                            <h:commandButton action="#{livroManagedBean.buscar()}" class="btn btn-default" value="buscar" />
                     </div>
-                        <h:commandButton action="#{livroManagedBean.buscar()}" class="btn btn-default" value="Submit" />
-                </div>
-                  <ul class="nav navbar-nav navbar-right">
+                  <ul class="nav navbar-nav navbar-right navegacao-direita">
                       <li><h:commandLink action="login">Olá #{homeManagedBean.usuario}</h:commandLink></li>
                       <li><h:commandLink action="carrinho"> 
                             <h:graphicImage library="images" name="carrinho.png" /> 
@@ -57,8 +59,6 @@
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </nav>
-                
-                
             </ui:insert>
         </div>
 
