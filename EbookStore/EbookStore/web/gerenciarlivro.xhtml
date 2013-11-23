@@ -5,50 +5,94 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-                template="./masterPage.xhtml">
+                template="./masterPage.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
-        <h:panelGrid>
+        <h:panelGrid style="width: 40%;">
         <h:panelGroup layout="block" class="panel panel-primary">  
         <h:panelGroup layout="block" class="panel-heading">Cadastro livro</h:panelGroup>
         <h:panelGroup layout="block" class="panel-body">
             <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" lang="pt_BR">
-                    <h:outputLabel value="Título:" for="titulo" />
+                    <div style="width: 130px;text-align:left;float:left;;float:left;">
+                        <h:outputLabel value="Título:" for="titulo" />
+                    </div> 
+                    <div>
                     <h:inputText value="#{livroManagedBean.livro.titulo}" pt:placeholder="titulo" title="título" />
+                    </div>
                     <br/>
-                    <h:outputLabel value="Quantidade de páginas:" for="arquivoLivro" />
-                    <h:inputText  value="#{livroManagedBean.livro.qtdePagina}" pt:placeholder="quantidade de páginas" title="#{bundle.CreateLivroTitle_qtdePagina}" />
+                    <div style="width: 130px;text-align:left;float:left;;">
+                    <h:outputLabel value="Qtd de páginas:" for="arquivoLivro" />
+                    </div>
+                    <div>
+                    <h:inputText  value="#{livroManagedBean.livro.qtdePagina}" pt:placeholder="quantidade de páginas" style="width: 50px" title="#{bundle.CreateLivroTitle_qtdePagina}" />
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Idioma:" for="idioma" />
+                    </div>
+                    <div>
                     <h:inputText  value="#{livroManagedBean.livro.idioma}" pt:placeholder="idioma" title="#{bundle.CreateLivroTitle_idioma}" />
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Descrição:" for="descricao" />
+                    </div>
+                    <div>
                     <h:inputTextarea cols="30" rows="8" value="#{livroManagedBean.livro.descricao}" pt:placeholder="descrição" title="#{bundle.CreateLivroTitle_descricao}" />
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
+                    <h:outputLabel value="Preço:" for="preco"/>
+                    </div>
+                    <div>
                     <h:inputText value="#{livroManagedBean.livro.preco}" pt:placeholder="preço" title="#{bundle.CreateLivroTitle_preco}" />
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Capa:" for="capaLivro" />
+                    </div>
+                    <div>
                     <h:inputFile value="#{livroManagedBean.capaLivro}" title="capaLivro" pt:required="true" />
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Arquivo:" for="arquivoLivro" />
+                    </div>
+                    <div>
                     <h:inputFile value="#{livroManagedBean.arquivoLivro}" title="arquivo" pt:required="true" />
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Genero:" for="genero" />
+                    </div>
+                    <div>
                     <h:selectOneMenu value="#{livroManagedBean.generoSelecionadoId}" title="genero" >
                         <f:selectItems value="#{generoManagedBean.listaGeneros}" var="genero" itemLabel="#{genero.nome}" itemValue="#{genero.id}"/>
                     </h:selectOneMenu>
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Autor" for="autor" />
+                    </div>
+                    <div>
                     <h:selectOneMenu value="#{livroManagedBean.autorSelecionadoId}" title="autor" >
                         <f:selectItems value="#{autorManagedBean.listaAutores}" var="autor" itemLabel="#{autor.nome}" itemValue="#{autor.id}"/>
                     </h:selectOneMenu>
+                    </div>
                     <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Editora:" for="editora" />
+                    </div>
+                    <div>
                     <h:selectOneMenu value="#{livroManagedBean.editoraSelecionadaId}" title="editora" >
                         <f:selectItems value="#{editoraManagedBean.listaEditoras}" var="editora" itemLabel="#{editora.nome}" itemValue="#{editora.id}"/>
                     </h:selectOneMenu>
+                    </div>
                     <br/>
+                    <div style="width: 100%;text-align: center;">
                     <h:commandButton action="#{livroManagedBean.salvarLivro()}" class="btn btn-default" value="salvar" />
                     <h:commandButton action="#{livroManagedBean.limparLivro()}" class="btn btn-default" value="limpar" />
+                    </div>
             </h:form>
         </h:panelGroup>
         </h:panelGroup>

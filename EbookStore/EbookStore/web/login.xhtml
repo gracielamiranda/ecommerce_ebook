@@ -1,16 +1,56 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="./masterPage.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml">
+    <ui:define name="content">
+        <h:panelGrid class="lado-a-lado">
+            <h:panelGroup layout="block" class="panel panel-primary">  
+            <h:panelGroup layout="block" class="panel-heading">Já é usuário</h:panelGroup>
+            <h:panelGroup layout="block" class="panel-body">
+                <h:form acceptcharset="ISO-8859-1" lang="pt_BR">
+                    <div class="separacao-por-baixo">
+                    <h:inputText value="#{usuarioManagedBean.usuarioFormulario.email}" pt:placeholder="seu e-mail" pt:type="email" pt:required="true"/>
+                    </div>
+                    <div class="separacao-por-baixo">
+                    <h:inputText value="#{usuarioManagedBean.usuarioFormulario.senha}" pt:placeholder="sua senha" pt:type="password" pt:required="true"/>
+                    </div>
+                    <div class="separacao-por-baixo">
+                    <h:commandButton action="#{usuarioManagedBean.entrar()}" class="btn btn-default" value="entrar" />
+                    </div>
+                </h:form>
+            </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGrid>
+        <h:panelGrid class="lado-a-lado">
+            <h:panelGroup layout="block" class="panel panel-primary">  
+            <h:panelGroup layout="block" class="panel-heading">Cadastre-se</h:panelGroup>
+            <h:panelGroup layout="block" class="panel-body">
+                <h:form acceptcharset="ISO-8859-1" lang="pt_BR">
+                    <div class="separacao-por-baixo">
+                        <h:inputText value="#{usuarioManagedBean.usuarioFormulario.nomeCompleto}" pt:placeholder="seu nome completo" pt:required="true"/>
+                    </div>
+                    <div class="separacao-por-baixo">
+                        <h:inputText value="#{usuarioManagedBean.usuarioFormulario.cpf}" pt:placeholder="seu cpf" pt:required="true"/>
+                    </div>
+                    <div class="separacao-por-baixo">
+                        <h:inputText value="#{usuarioManagedBean.usuarioFormulario.telefone}" pt:placeholder="seu telefone"/>
+                    </div>
+                    <div class="separacao-por-baixo">
+                    <h:inputText value="#{usuarioManagedBean.usuarioFormulario.email}" pt:placeholder="seu e-mail" pt:type="email" pt:required="true"/>
+                    </div>
+                    <div class="separacao-por-baixo">
+                    <h:inputText value="#{usuarioManagedBean.usuarioFormulario.senha}" pt:placeholder="sua senha" pt:type="password" pt:required="true"/>
+                    </div>
+                    <div class="separacao-por-baixo">
+                        <h:commandButton action="#{usuarioManagedBean.criar()}" class="btn btn-default" value="cadastrar" />
+                    </div>
+                </h:form>
+            </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGrid>
+    </ui:define>
 
-    <body>
-
-        <ui:composition template="./masterPage.xhtml">
-            <ui:define name="content">
-                Login
-            </ui:define>
-
-        </ui:composition>
-
-    </body>
-</html>
+</ui:composition>

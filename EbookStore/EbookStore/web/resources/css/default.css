@@ -91,3 +91,13 @@ a:link:hover, a:visited:hover  {
 {
     margin-top: 13px !important;
 }
+
+.separacao-por-baixo
+{
+    margin-bottom: 10px;
+}
+
+.lado-a-lado
+{
+    float:left;
+}
