@@ -15,9 +15,10 @@
         <title>Facelets Template</title>
     </h:head>
     <h:body>
-        <h:form>
+        
         <div id="top" class="top">
             <ui:insert name="top">
+                <h:form>
                 <nav class="navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -61,13 +62,14 @@
                   </ul>
                 </div><!-- /.navbar-collapse -->
               </nav>
+            </h:form>
             </ui:insert>
         </div>
 
         <div id="content" class="center_content">
             <ui:insert name="content">Content</ui:insert>
         </div>
-        </h:form>
+            
     </h:body>
 
 </html>

@@ -2,7 +2,6 @@ package br.com.mackenzie.controllers;
 
 import br.com.mackenzie.dao.EditoraDAO;
 import br.com.mackenzie.dominio.Editora;
-import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
@@ -30,15 +29,6 @@ public class EditoraManagedBean {
     
     public List<Editora> getListaEditoras(){
         return this.editoraDAO.obterTodos();
-    }
-    
-    public List<String> getListNomesEditora(){
-        List<String> listaNomesEditoras = new ArrayList<String>();
-        for (Editora item : this.editoraDAO.obterTodos()) {
-            listaNomesEditoras.add(item.getNome());
-        }
-        
-        return listaNomesEditoras;
     }
     
     public void salvarEditora(){

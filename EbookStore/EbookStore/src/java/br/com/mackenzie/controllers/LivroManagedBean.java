@@ -6,15 +6,20 @@
 
 package br.com.mackenzie.controllers;
 
+import br.com.mackenzie.dao.AutorDAO;
+import br.com.mackenzie.dao.EditoraDAO;
+import br.com.mackenzie.dao.GeneroDAO;
 import br.com.mackenzie.dao.LivroDAO;
 import br.com.mackenzie.dominio.Livro;
+import static com.google.common.io.ByteStreams.toByteArray;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import com.google.gson.Gson;
+import java.io.IOException;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -24,13 +29,24 @@ import com.google.gson.Gson;
 @SessionScoped
 public class LivroManagedBean {
 
+    private String editoraSelecionadaId;
+    private String generoSelecionadoId;
+    private String autorSelecionadoId;
     private List<Livro> listaLivros = new ArrayList<Livro>();
     private String textoBusca;
     private Livro livro;
     private int primeiroResultado;
-    private int resultadoMaximo =10 ;
+    private int resultadoMaximo = 10 ;
+    private Part arquivoLivro;
+    private Part capaLivro;
     @EJB
     private LivroDAO livroDAO;
+    @EJB
+    private EditoraDAO editoraDAO;
+    @EJB
+    private GeneroDAO generoDAO;
+    @EJB
+    private AutorDAO autorDAO;
     /**
      * Creates a new instance of livroManagedBean
      */
@@ -47,6 +63,30 @@ public class LivroManagedBean {
       
     }
 
+    public String getEditoraSelecionadaId() {
+        return editoraSelecionadaId;
+    }
+
+    public void setEditoraSelecionadaId(String editoraSelecionadaId) {
+        this.editoraSelecionadaId = editoraSelecionadaId;
+    }
+
+    public String getGeneroSelecionadoId() {
+        return generoSelecionadoId;
+    }
+
+    public void setGeneroSelecionadoId(String generoSelecionadoId) {
+        this.generoSelecionadoId = generoSelecionadoId;
+    }
+
+    public String getAutorSelecionadoId() {
+        return autorSelecionadoId;
+    }
+
+    public void setAutorSelecionadoId(String autorSelecionadoId) {
+        this.autorSelecionadoId = autorSelecionadoId;
+    }
+    
     public int getPrimeiroResultado() {
         return primeiroResultado;
     }
@@ -78,9 +118,31 @@ public class LivroManagedBean {
     public void setLivro(Livro livro) {
         this.livro= livro;
     }
-    
-    public void salvarLivro(){
+
+    public Part getArquivoLivro() {
+        return arquivoLivro;
+    }
+
+    public void setArquivoLivro(Part arquivoLivro) {
+        this.arquivoLivro = arquivoLivro;
+    }
+
+    public Part getCapaLivro() {
+        return capaLivro;
+    }
+
+    public void setCapaLivro(Part capaLivro) {
+        this.capaLivro = capaLivro;
+    }
+       
+    public void salvarLivro() throws IOException{
+        livro.setGenero(generoDAO.obter(Integer.parseInt(this.generoSelecionadoId)));
+        livro.setAutor(autorDAO.obter(Integer.parseInt(this.autorSelecionadoId)));
+        livro.setEditora(editoraDAO.obter(Integer.parseInt(this.editoraSelecionadaId)));
+        livro.setCapa(toByteArray(this.capaLivro.getInputStream()));
+        livro.setArquivo(toByteArray(this.arquivoLivro.getInputStream()));
         this.livroDAO.inserir(livro);
+        this.limparLivro();
     }
    
     public void buscar(){
@@ -88,11 +150,10 @@ public class LivroManagedBean {
     }   
     
     public void limparLivro(){
-        
+        this.setLivro(new Livro());
     }
     
     public String transformarObjetoEmJson(Livro livro){
         return new Gson().toJson(livro);
-    }
-    
+    }    
 }

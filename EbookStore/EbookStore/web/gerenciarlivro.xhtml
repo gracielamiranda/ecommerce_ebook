@@ -1,52 +1,57 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
-                template="./masterPage.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
-
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                template="./masterPage.xhtml">
     <ui:define name="content">
-        <h:form>
-                    <h:commandButton action="#{inicioManagedBean.inserir()}" value="inserir livros de teste" />
-                    <h:inputText id="titulo" value="#{livroManagedBean.livro.titulo}" pt:placeholder="titulo" title="título" />
+        <h:panelGrid>
+        <h:panelGroup layout="block" class="panel panel-primary">  
+        <h:panelGroup layout="block" class="panel-heading">Cadastro livro</h:panelGroup>
+        <h:panelGroup layout="block" class="panel-body">
+            <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" lang="pt_BR">
+                    <h:outputLabel value="Título:" for="titulo" />
+                    <h:inputText value="#{livroManagedBean.livro.titulo}" pt:placeholder="titulo" title="título" />
                     <br/>
-                    <h:inputTextarea rows="4" cols="30" id="capa" value="#{livroController.selected.capa}" pt:placeholder="capa" title="#{bundle.CreateLivroTitle_capa}" />
+                    <h:outputLabel value="Quantidade de páginas:" for="arquivoLivro" />
+                    <h:inputText  value="#{livroManagedBean.livro.qtdePagina}" pt:placeholder="quantidade de páginas" title="#{bundle.CreateLivroTitle_qtdePagina}" />
                     <br/>
-                    <h:inputText id="qtdePagina" value="#{livroManagedBean.livro.qtdePagina}" pt:placeholder="quantidade de páginas" title="#{bundle.CreateLivroTitle_qtdePagina}" />
+                    <h:outputLabel value="Idioma:" for="idioma" />
+                    <h:inputText  value="#{livroManagedBean.livro.idioma}" pt:placeholder="idioma" title="#{bundle.CreateLivroTitle_idioma}" />
                     <br/>
-                    <h:inputText id="idioma" value="#{livroManagedBean.livro.idioma}" pt:placeholder="idioma" title="#{bundle.CreateLivroTitle_idioma}" />
+                    <h:outputLabel value="Descrição:" for="descricao" />
+                    <h:inputTextarea cols="30" rows="8" value="#{livroManagedBean.livro.descricao}" pt:placeholder="descrição" title="#{bundle.CreateLivroTitle_descricao}" />
                     <br/>
-                    <h:inputText id="descricao" value="#{livroManagedBean.livro.descricao}" pt:placeholder="descrição" title="#{bundle.CreateLivroTitle_descricao}" />
+                    <h:inputText value="#{livroManagedBean.livro.preco}" pt:placeholder="preço" title="#{bundle.CreateLivroTitle_preco}" />
                     <br/>
-                    <h:inputText id="preco" value="#{livroManagedBean.livro.preco}" pt:placeholder="preço" title="#{bundle.CreateLivroTitle_preco}" />
+                    <h:outputLabel value="Capa:" for="capaLivro" />
+                    <h:inputFile value="#{livroManagedBean.capaLivro}" title="capaLivro" pt:required="true" />
                     <br/>
-                    <h:outputLabel value="#{bundle.CreateLivroLabel_arquivo}" for="arquivo" />
-                    <h:inputTextarea rows="4" cols="30" id="arquivo" value="#{livroController.selected.arquivo}" title="#{bundle.CreateLivroTitle_arquivo}" />
+                    <h:outputLabel value="Arquivo:" for="arquivoLivro" />
+                    <h:inputFile value="#{livroManagedBean.arquivoLivro}" title="arquivo" pt:required="true" />
                     <br/>
-                    <h:outputLabel value="#{bundle.CreateLivroLabel_editora}" for="editora" />
-                    <h:selectOneMenu id="editora" value="#{editoraManagedBean.listaEditoras}" title="editora" >
-                        <f:selectItems value="#{editoraManagedBean.listNomesEditora}"/>
+                    <h:outputLabel value="Genero:" for="genero" />
+                    <h:selectOneMenu value="#{livroManagedBean.generoSelecionadoId}" title="genero" >
+                        <f:selectItems value="#{generoManagedBean.listaGeneros}" var="genero" itemLabel="#{genero.nome}" itemValue="#{genero.id}"/>
                     </h:selectOneMenu>
                     <br/>
-                    <h:outputLabel value="#{bundle.CreateLivroLabel_genero}" for="genero" />
-                    <h:selectOneMenu id="genero" value="#{livroController.selected.genero}" title="#{bundle.CreateLivroTitle_genero}" >
-                        <f:selectItems value="#{generoController.itemsAvailableSelectOne}"/>
+                    <h:outputLabel value="Autor" for="autor" />
+                    <h:selectOneMenu value="#{livroManagedBean.autorSelecionadoId}" title="autor" >
+                        <f:selectItems value="#{autorManagedBean.listaAutores}" var="autor" itemLabel="#{autor.nome}" itemValue="#{autor.id}"/>
                     </h:selectOneMenu>
                     <br/>
-                    <h:outputLabel value="#{bundle.CreateLivroLabel_autor}" for="autor" />
-                    <h:selectOneMenu id="autor" value="#{livroController.selected.autor}" title="#{bundle.CreateLivroTitle_autor}" >
-                        <f:selectItems value="#{autorController.itemsAvailableSelectOne}"/>
+                    <h:outputLabel value="Editora:" for="editora" />
+                    <h:selectOneMenu value="#{livroManagedBean.editoraSelecionadaId}" title="editora" >
+                        <f:selectItems value="#{editoraManagedBean.listaEditoras}" var="editora" itemLabel="#{editora.nome}" itemValue="#{editora.id}"/>
                     </h:selectOneMenu>
                     <br/>
-                    <h:outputLabel value="#{bundle.CreateLivroLabel_estoqueLivro}" for="estoqueLivro" />
-                    <h:selectOneMenu id="estoqueLivro" value="#{livroController.selected.estoqueLivro}" title="#{bundle.CreateLivroTitle_estoqueLivro}" >
-                        <f:selectItems value="#{estoqueLivroController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                <br />
-                <h:commandButton action="#{livroManagedBean.salvarLivro()}" class="btn btn-default" value="salvar" />
-                <h:commandButton action="#{livroManagedBean.limparLivro()}" class="btn btn-default" value="limpar" />
+                    <h:commandButton action="#{livroManagedBean.salvarLivro()}" class="btn btn-default" value="salvar" />
+                    <h:commandButton action="#{livroManagedBean.limparLivro()}" class="btn btn-default" value="limpar" />
             </h:form>
+        </h:panelGroup>
+        </h:panelGroup>
+        </h:panelGrid>
     </ui:define>
-
 </ui:composition>

@@ -7,7 +7,9 @@
     <body>
 
         <ui:composition template="./masterPage.xhtml">
+            
             <ui:define name="content">
+                <h:form>
                 <div>
                 <h:commandLink value="Gerenciar Gênero" action="gerenciargenero"/>
                 </div>
@@ -20,8 +22,9 @@
                 <div>
                 <h:commandLink value="Gerenciar Livro" action="gerenciarlivro"/>
                 </div>
+                </h:form>
             </ui:define>
-
+           
         </ui:composition>
 
     </body>
