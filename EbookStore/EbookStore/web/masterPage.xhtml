@@ -35,7 +35,7 @@
                               <li><h:commandLink class="link-dropdown" action="#{livroManagedBean.buscarPorGenero(item)}">#{item.nome}</h:commandLink></li>
                               <li class="divider"></li>
                           </ui:repeat>
-                          <li><a class="link-dropdown" href="#{livroManagedBean.buscarMaisComprados()}">mais comprados</a></li>
+                          <li><a class="link-dropdown" href="#{livroManagedBean.buscarMaisComprados()}">mais comprados</a></li> 
                       </ul>
                     </li>
                   </ul>
@@ -51,7 +51,7 @@
                       <li>
                           <a href="carrinho.xhtml"> 
                             <h:graphicImage library="images" name="carrinho.png" /> 
-                            <span class="badge">#{compraManagedBean.compra.itemCompras.size()}</span> 
+                            <span class="badge">#{compraManagedBean.itensCompra.size()}</span> 
                           </a>
                      </li>
                   </ul>
