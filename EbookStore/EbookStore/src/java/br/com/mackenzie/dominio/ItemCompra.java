@@ -7,6 +7,7 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,7 +21,7 @@ public class ItemCompra implements Serializable{
 
     @Id
     @JoinColumn(name="id_compra",columnDefinition="id")
-    @OneToOne
+    @ManyToOne
     private Compra compra;
 
     @Id
@@ -29,6 +30,16 @@ public class ItemCompra implements Serializable{
     private Livro livro;
     
     private int qtde;
+
+    public ItemCompra(Livro livro, int qtde) {
+        this.livro = livro;
+        this.qtde = qtde;
+    }
+
+    public ItemCompra() {
+    }
+    
+    
 
     public Compra getCompra() {
         return compra;

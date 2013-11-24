@@ -3,29 +3,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
         <ui:composition template="./masterPage.xhtml">
             <ui:define name="content">
-                <div class="row">
-                    <ui:repeat var="livro" value="#{livroManagedBean.listaLivros}">
-                        <div class="col-sm-6 col-md-4 coluna-produtos">
-                            <div class="thumbnail">
-                                <h:graphicImage id="imgProduto" library="images" name="imagem-padrao300x200.png" width="300px" height="200px" alt="..."  />
-                                <div class="caption">
-                                    <h:outputText value="#{livro.titulo}" /><br />
-                                    <h:outputText value="#{livro.preco}"/>
-                                    <p>
-                                        <a href="#" class="btn btn-primary" role="button">Comprar</a> 
-                                        <a href="" class="btn btn-default detalhes-produtos" data-item="#{livroManagedBean.transformarObjetoEmJson(livro)}" role="button">Detalhes</a>
-                                    </p>
+                <h:form>
+                    <div class="row">
+                        <ui:repeat var="livro" value="#{livroManagedBean.listaLivros}">
+                            <div class="col-sm-6 col-md-4 coluna-produtos">
+                                <div class="thumbnail">
+                                    <h:graphicImage id="imgProduto" library="images" name="imagem-padrao300x200.png" width="300px" height="200px" alt="..."  />
+                                    <div class="caption">
+                                        <h:outputText value="#{livro.titulo}" /><br />
+                                        <h:outputText value="#{livro.preco}"/>
+                                        <p>
+                                            <h:commandButton class="btn btn-primary" action="#{compraManagedBean.comprar(livro)}" value="Comprar" />
+                                            <a href="" class="btn btn-default detalhes-produtos" data-item="#{livroManagedBean.transformarObjetoEmJson(livro)}" role="button">Detalhes</a>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </ui:repeat>
-                </div>
-
+                        </ui:repeat>
+                    </div>
+                </h:form>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -44,6 +46,7 @@
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->
+
             </ui:define>
         </ui:composition>
     </body>

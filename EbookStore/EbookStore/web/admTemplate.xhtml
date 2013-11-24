@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <ui:composition template="./masterPage.xhtml">
+  
+    <ui:define name="content">
+        <div id="topAdm" >
+            <ui:insert name="topAdm">
+                <nav class="navbar navbar-default" role="navigation">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <h:form>
+                    <ul class="nav navbar-nav">
+                         <li>
+                          <h:commandLink value="Gerenciar Gênero" action="gerenciargenero"/>
+                          </li>
+                          <li>
+                          <h:commandLink value="Gerenciar Autor" action="gerenciarautor"/>
+                          </li>
+                          <li>
+                          <h:commandLink value="Gerenciar Editora" action="gerenciareditora"/>
+                          </li>
+                          <li>
+                          <h:commandLink value="Gerenciar Livro" action="gerenciarlivro"/>
+                          </li>
+                    </ul>                       
+                    </h:form>
+
+                 
+                </div><!-- /.navbar-collapse -->
+              </nav>
+            </ui:insert>
+        </div>
+        
+       
+
+        <div id="contentAdm" >
+            <ui:insert name="contentAdm"></ui:insert>
+        </div>
+
+    </ui:define>
+    </ui:composition>
+</html>

@@ -18,8 +18,17 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.google.gson.Gson;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -39,6 +48,7 @@ public class LivroManagedBean {
     private int resultadoMaximo = 10 ;
     private Part arquivoLivro;
     private Part capaLivro;
+
     @EJB
     private LivroDAO livroDAO;
     @EJB
@@ -156,4 +166,19 @@ public class LivroManagedBean {
     public String transformarObjetoEmJson(Livro livro){
         return new Gson().toJson(livro);
     }    
+   /* public StreamedContent getDynamicImage() {
+        StreamedContent imagem;
+        try{ 
+            BufferedImage img = ImageIO.read(file);  
+            File file = new File("imagem");  
+            ImageIO.write(img, "png", file);  
+            FileInputStream fi = new FileInputStream(file);  
+            imagem = new DefaultStreamedContent(fi);  
+        } catch (Exception e) {  
+            FacesContext context = FacesContext.getCurrentInstance(); 
+            imagem = new DefaultStreamedContent();
+            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro! " + e, " "));  
+        }  
+        return imagem; 
+    }*/
 }

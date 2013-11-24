@@ -7,7 +7,10 @@
 package br.com.mackenzie.controllers;
 
 import br.com.mackenzie.dao.GeneroDAO;
+import br.com.mackenzie.dao.UsuarioDAO;
 import br.com.mackenzie.dominio.Genero;
+import br.com.mackenzie.dominio.Usuario;
+import br.com.mackenzie.dominio.enumeracoes.Perfil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,7 +26,6 @@ import javax.faces.bean.SessionScoped;
 public class HomeManagedBean {
 
     private List<Genero> listaGenero =  new ArrayList<Genero>();
-    private String usuario;
     private String textoBusca;
     @EJB
     private GeneroDAO generoDAO;
@@ -31,7 +33,6 @@ public class HomeManagedBean {
      * Creates a new instance of HomeManagedBean
      */
     public HomeManagedBean() {
-        usuario = "Visitante";
     }
 
     public List<Genero> getListaGenero() {
@@ -40,22 +41,9 @@ public class HomeManagedBean {
         }
         return listaGenero;
     }
-
-    
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-   
     
     public String buscar(){
         return "index";
-        
-    }
-    
-    
+    }   
     
 }

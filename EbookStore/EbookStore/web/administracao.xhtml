@@ -5,27 +5,25 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html">
 
     <body>
-
-        <ui:composition template="./masterPage.xhtml">
-            
-            <ui:define name="content">
-                <h:form>
-                <div>
-                <h:commandLink value="Gerenciar Gênero" action="gerenciargenero"/>
-                </div>
-                <div>
-                <h:commandLink value="Gerenciar Autor" action="gerenciarautor"/>
-                </div>
-                <div>
-                <h:commandLink value="Gerenciar Editora" action="gerenciareditora"/>
-                </div>
-                <div>
-                <h:commandLink value="Gerenciar Livro" action="gerenciarlivro"/>
-                </div>
-                </h:form>
-            </ui:define>
+               <ui:composition template="./admTemplate.xhtml">
+                    <ui:define name="contentAdm">
+                        <h:form>
+                        <div>
+                        <h:commandLink value="Gerenciar Gênero" action="gerenciargenero"/>
+                        </div>
+                        <div>
+                        <h:commandLink value="Gerenciar Autor" action="gerenciarautor"/>
+                        </div>
+                        <div>
+                        <h:commandLink value="Gerenciar Editora" action="gerenciareditora"/>
+                        </div>
+                        <div>
+                        <h:commandLink value="Gerenciar Livro" action="gerenciarlivro"/>
+                        </div>
+                        </h:form>
+                  </ui:define>
+                </ui:composition>
            
-        </ui:composition>
 
     </body>
 </html>

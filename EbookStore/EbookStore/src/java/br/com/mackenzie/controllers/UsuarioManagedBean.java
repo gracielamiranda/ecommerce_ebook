@@ -26,6 +26,7 @@ public class UsuarioManagedBean {
     private Usuario usuarioLogado;
     @EJB
     private UsuarioDAO usuarioDAO;
+    private boolean adm;
 
     public UsuarioManagedBean() {
         this.usuarioFormulario = new Usuario();
@@ -76,6 +77,8 @@ public class UsuarioManagedBean {
     
     public String getLoginUsuario(){
         String loginUsuario = "visitante";
+        inserirUsuarioAdm();
+
         if (this.usuarioLogado != null) {
             loginUsuario = this.usuarioLogado.getEmail();
         }
@@ -86,9 +89,23 @@ public class UsuarioManagedBean {
     public String urlAutenticado(){
         String url = "login?faces-redirect=true";
         if (usuarioLogado != null) {
-            url = "minhapagina?faces-redirect=true";
+            if(usuarioLogado.getPerfil() == Perfil.Cliente){
+                url = "minhapagina?faces-redirect=true";
+            }else if (usuarioLogado.getPerfil() == Perfil.Administrador){
+                url = "administracao?faces-redirect=true";
+            }
         }
         
         return url;
+    }
+    private void inserirUsuarioAdm() {
+        if(!adm) {
+            Usuario usuario = new Usuario("adm@adm.com", "adm", Perfil.Administrador);
+            usuarioDAO.inserir(usuario);
+            adm = true;
+        }
+    }
+    public void logout(){
+       this.usuarioLogado = new Usuario();
     }
 }

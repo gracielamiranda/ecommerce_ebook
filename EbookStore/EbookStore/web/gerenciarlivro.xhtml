@@ -5,9 +5,9 @@
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
-                template="./masterPage.xhtml"
+                template="./admTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml">
-    <ui:define name="content">
+    <ui:define name="contentAdm">
         <h:panelGrid style="width: 40%;">
         <h:panelGroup layout="block" class="panel panel-primary">  
         <h:panelGroup layout="block" class="panel-heading">Cadastro livro</h:panelGroup>
@@ -52,14 +52,14 @@
                     <h:outputLabel value="Capa:" for="capaLivro" />
                     </div>
                     <div>
-                    <h:inputFile value="#{livroManagedBean.capaLivro}" title="capaLivro" pt:required="true" />
+                        <h:inputFile value="#{livroManagedBean.capaLivro}"  title="capaLivro" pt:required="true" id="arquivoCapa"  onchange="validateFoto(this)"/>
                     </div>
                     <br/>
                     <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Arquivo:" for="arquivoLivro" />
                     </div>
                     <div>
-                    <h:inputFile value="#{livroManagedBean.arquivoLivro}" title="arquivo" pt:required="true" />
+                        <h:inputFile value="#{livroManagedBean.arquivoLivro}" id="arquivoLivro" title="arquivo" pt:required="true" onchange="validatePdf(this)" />
                     </div>
                     <br/>
                     <div style="width: 130px;text-align:left;float:left;;">
