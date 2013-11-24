@@ -101,6 +101,8 @@ public class CompraManagedBean {
                 itemCompra.setCompra(compra);
                 this.itemCompraDAO.inserir(itemCompra);
             }
+            
+            this.limparCompra();
         }
         
         return url;
@@ -129,6 +131,11 @@ public class CompraManagedBean {
         }
         
         return url;
+    }
+    
+    private void limparCompra(){
+       this.itensCompra = new ArrayList<ItemCompra>();
+        this.compra = new Compra(); 
     }
     
 }
