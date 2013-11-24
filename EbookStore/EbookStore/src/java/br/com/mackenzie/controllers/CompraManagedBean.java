@@ -122,4 +122,13 @@ public class CompraManagedBean {
         return String.format("%.2f",soma);
     }
     
+    public String fecharPedido(){
+        String url = "pagamento?faces-redirect=true";
+        if (this.usuarioManagedBean.getUsuarioLogado() == null) {
+            url = "login?faces-redirect=true";
+        }
+        
+        return url;
+    }
+    
 }

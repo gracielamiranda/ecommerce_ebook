@@ -11,7 +11,7 @@
                 <h:panelGroup layout="block" rendered="#{compraManagedBean.itensCompra.size() > 0? false : true}" class="alert alert-warning texto-centralizado">
                 #{bundle.CarrinhoVazio}
             </h:panelGroup>
-            <h:panelGroup layout="block" class="panel panel-default" rendered="#{compraManagedBean.itensCompra.size() > 0? false : true}">  
+            <h:panelGroup layout="block" class="panel panel-default" rendered="#{compraManagedBean.itensCompra.size() > 0? true : false}">  
             <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Carrinho de compras</strong></h:panelGroup>
             <h:panelGroup layout="block" class="panel-body">
                 <h:dataTable class="table carrinho" value="#{compraManagedBean.itensCompra}" var="item">
@@ -41,7 +41,7 @@
                         <h:outputLabel value="Total da compra:#{compraManagedBean.valorTotalCompra()}"/>
                     </f:facet>
                 </h:dataTable>
-                <h:commandButton value="Fechar pedido" action="pagamento?faces-redirect=true"/>
+                <h:commandButton value="Fechar pedido" action="#{compraManagedBean.fecharPedido()}"/>
             </h:panelGroup>
             </h:panelGroup>
             </h:panelGrid>
