@@ -22,6 +22,7 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
@@ -45,7 +46,6 @@ public class LivroManagedBean {
     private int resultadoMaximo = 10 ;
     private Part arquivoLivro;
     private Part capaLivro;
-    private boolean buscar = true;
 
     @EJB
     private LivroDAO livroDAO;
@@ -60,13 +60,8 @@ public class LivroManagedBean {
         this.livro = new Livro();
     }
 
-    public List<Livro> getListaLivros() {
-        if(buscar){
-          this.listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida","DESC");
-        }
-      
-      return this.listaLivros;
-      
+    public List<Livro> getListaLivros() {      
+      return this.listaLivros;      
     }
 
     public String getEditoraSelecionadaId() {
@@ -154,7 +149,6 @@ public class LivroManagedBean {
     }
    
     public void buscar(){
-        buscar = false;
         this.listaLivros = livroDAO.obterPorTitulo(textoBusca);   
         this.textoBusca = "";
 
@@ -183,17 +177,15 @@ public class LivroManagedBean {
     
     
     public String index(){
-        buscar = true;
+        this.listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida", "DESC");
         return "index?faces-redirect=true";
     }
     
     public void buscarPorGenero(Genero genero){
-        buscar = false;
         this.listaLivros = livroDAO.obterPorGenero(genero.getNome());
     }
     
     public void buscarMaisComprados(){
-        buscar = false;
         this.listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida", "DESC");
     }
 }
