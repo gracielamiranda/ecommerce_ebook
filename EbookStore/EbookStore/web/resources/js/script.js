@@ -15,7 +15,7 @@ function validatePdf(arquivo) {
           return true;
       if(file.toLowerCase().indexOf(".pdf") == -1 ) 
       {
-          alert(" O arquivo precisar ter a extensão pdf " );
+          alert("Formato Inválido!!  O arquivo precisar ter a extensão pdf " );
           arquivo.value = "";
           return false;
       }
@@ -28,7 +28,7 @@ function validatePdf(arquivo) {
             return true;
         if(file.toLowerCase().indexOf(".jpg") == -1 && file.toLowerCase().indexOf(".png") == -1   && file.toLowerCase().indexOf(".bmp") == -1 &&file.toLowerCase().indexOf(".jpeg") == -1) 
         {
-            alert("Invalid File Format!! Please upload jpg/bmp/gif");
+            alert("Formato Inválido!! O arquivo precisar ter a extensão jpg/bmp/png");
             img.value = "";
             return false;
         }

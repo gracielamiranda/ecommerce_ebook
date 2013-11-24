@@ -4,15 +4,7 @@
  */
 package br.com.mackenzie.dominio;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,9 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
-import javax.persistence.Transient;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -44,9 +33,8 @@ public class Livro implements Serializable{
     private int id;
   
     private String titulo;
-    @Lob
-    @Basic(fetch= FetchType.LAZY)
-    private byte[] capa;
+    
+    private String capa;
     
     @Column(name="qtde_pagina")
     private int qtdePagina;
@@ -99,11 +87,11 @@ public class Livro implements Serializable{
         this.titulo = titulo;
     }
 
-    public byte[] getCapa() {
+    public String getCapa() {
         return capa;
     }
 
-    public void setCapa(byte[] capa) {
+    public void setCapa(String capa) {
         this.capa = capa;
     }
 

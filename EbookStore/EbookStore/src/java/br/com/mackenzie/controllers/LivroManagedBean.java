@@ -18,17 +18,12 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import com.google.gson.Gson;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.imageio.ImageIO;
 import javax.servlet.http.Part;
-import org.primefaces.model.DefaultStreamedContent;
-import org.primefaces.model.StreamedContent;
 
 /**
  *
@@ -38,6 +33,7 @@ import org.primefaces.model.StreamedContent;
 @SessionScoped
 public class LivroManagedBean {
 
+    private final String PATH_IMAGES =  FacesContext.getCurrentInstance().getExternalContext().getRealPath("") + "/resources/images/";  
     private String editoraSelecionadaId;
     private String generoSelecionadoId;
     private String autorSelecionadoId;
@@ -65,10 +61,7 @@ public class LivroManagedBean {
     }
 
     public List<Livro> getListaLivros() {
-      if(listaLivros.isEmpty()){
-          listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida","DESC");
-        
-      }
+      listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida","DESC");
       return listaLivros;
       
     }
@@ -149,9 +142,11 @@ public class LivroManagedBean {
         livro.setGenero(generoDAO.obter(Integer.parseInt(this.generoSelecionadoId)));
         livro.setAutor(autorDAO.obter(Integer.parseInt(this.autorSelecionadoId)));
         livro.setEditora(editoraDAO.obter(Integer.parseInt(this.editoraSelecionadaId)));
-        livro.setCapa(toByteArray(this.capaLivro.getInputStream()));
+        salvarCapa(capaLivro);
+        livro.setCapa(capaLivro.getSubmittedFileName());
         livro.setArquivo(toByteArray(this.arquivoLivro.getInputStream()));
         this.livroDAO.inserir(livro);
+        
         this.limparLivro();
     }
    
@@ -166,19 +161,17 @@ public class LivroManagedBean {
     public String transformarObjetoEmJson(Livro livro){
         return new Gson().toJson(livro);
     }    
-   /* public StreamedContent getDynamicImage() {
-        StreamedContent imagem;
-        try{ 
-            BufferedImage img = ImageIO.read(file);  
-            File file = new File("imagem");  
-            ImageIO.write(img, "png", file);  
-            FileInputStream fi = new FileInputStream(file);  
-            imagem = new DefaultStreamedContent(fi);  
-        } catch (Exception e) {  
-            FacesContext context = FacesContext.getCurrentInstance(); 
-            imagem = new DefaultStreamedContent();
-            context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro! " + e, " "));  
-        }  
-        return imagem; 
-    }*/
+
+    private void salvarCapa(Part capa) {
+        try{
+            File file = new File(PATH_IMAGES, capa.getSubmittedFileName());
+            FileOutputStream os = new FileOutputStream(file);
+            os.write(toByteArray(capa.getInputStream()));
+            os.flush();
+            os.close();
+        }catch(IOException io){
+          FacesContext context = FacesContext.getCurrentInstance(); 
+          context.addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Não foi possível incluir o livro "));     
+        }
+    }
 }
