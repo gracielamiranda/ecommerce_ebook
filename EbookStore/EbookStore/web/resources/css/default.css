@@ -101,3 +101,18 @@ a:link:hover, a:visited:hover  {
 {
     float:left;
 }
+
+.carrinho > thead > tr > th
+{
+    text-align: center !important;
+}
+
+.carrinho > tbody > tr > td
+{
+    text-align: center !important;
+}
+
+.texto-centralizado
+{
+    text-align:center;
+}

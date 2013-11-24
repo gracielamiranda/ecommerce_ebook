@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.mackenzie.dominio;
 
 import java.io.Serializable;
@@ -15,11 +11,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
-/**
- *
- * @author 71306579
- */
 
 @Entity
 @Table(name="tb_compra")

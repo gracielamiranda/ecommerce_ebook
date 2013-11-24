@@ -53,5 +53,20 @@ public class CompraManagedBean {
         return "carrinho?faces-redirect=true";
     }
        
+    public String removerItemCarrinho(ItemCompra itemCompra){
+        compra.getItemCompras().remove(itemCompra);
+        
+        return "carrinho?faces-redirect=true";
+    }
+    
+    public String valorTotalCompra(){
+        double soma = 0;
+        
+        for (ItemCompra item : compra.getItemCompras()) {
+            soma += item.getLivro().getPreco();
+        }
+        
+        return String.format("%s", soma);
+    }
     
 }
