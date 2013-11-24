@@ -7,6 +7,9 @@
     <body>
         <ui:composition template="./masterPage.xhtml">
             <ui:define name="content">
+                <h:panelGroup layout="block" rendered="#{livroManagedBean.listaLivros.size() > 0? false : true}" class="alert alert-warning texto-centralizado">
+                    #{bundle.PesquisaNaoEncontrada}
+                </h:panelGroup>
                 <h:form>
                     <div class="row">
                         <ui:repeat var="livro" value="#{livroManagedBean.listaLivros}">
@@ -25,6 +28,7 @@
                             </div>
                         </ui:repeat>
                     </div>
+                    <h:commandButton action="#{inicioManagedBean.inserir()}" value="teste" />
                 </h:form>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -38,9 +42,7 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                            </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
                 </div><!-- /.modal -->

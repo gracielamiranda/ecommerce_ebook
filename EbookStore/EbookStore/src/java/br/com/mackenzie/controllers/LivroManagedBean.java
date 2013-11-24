@@ -10,6 +10,7 @@ import br.com.mackenzie.dao.AutorDAO;
 import br.com.mackenzie.dao.EditoraDAO;
 import br.com.mackenzie.dao.GeneroDAO;
 import br.com.mackenzie.dao.LivroDAO;
+import br.com.mackenzie.dominio.Genero;
 import br.com.mackenzie.dominio.Livro;
 import static com.google.common.io.ByteStreams.toByteArray;
 import java.util.ArrayList;
@@ -44,6 +45,7 @@ public class LivroManagedBean {
     private int resultadoMaximo = 10 ;
     private Part arquivoLivro;
     private Part capaLivro;
+    private boolean buscar = true;
 
     @EJB
     private LivroDAO livroDAO;
@@ -53,16 +55,17 @@ public class LivroManagedBean {
     private GeneroDAO generoDAO;
     @EJB
     private AutorDAO autorDAO;
-    /**
-     * Creates a new instance of livroManagedBean
-     */
+   
     public LivroManagedBean() {
         this.livro = new Livro();
     }
 
     public List<Livro> getListaLivros() {
-      listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida","DESC");
-      return listaLivros;
+        if(buscar){
+          this.listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida","DESC");
+        }
+      
+      return this.listaLivros;
       
     }
 
@@ -139,19 +142,22 @@ public class LivroManagedBean {
     }
        
     public void salvarLivro() throws IOException{
-        livro.setGenero(generoDAO.obter(Integer.parseInt(this.generoSelecionadoId)));
-        livro.setAutor(autorDAO.obter(Integer.parseInt(this.autorSelecionadoId)));
-        livro.setEditora(editoraDAO.obter(Integer.parseInt(this.editoraSelecionadaId)));
+        this.livro.setGenero(generoDAO.obter(Integer.parseInt(this.generoSelecionadoId)));
+        this.livro.setAutor(autorDAO.obter(Integer.parseInt(this.autorSelecionadoId)));
+        this.livro.setEditora(editoraDAO.obter(Integer.parseInt(this.editoraSelecionadaId)));
         salvarCapa(capaLivro);
-        livro.setCapa(capaLivro.getSubmittedFileName());
-        livro.setArquivo(toByteArray(this.arquivoLivro.getInputStream()));
+        this.livro.setCapa(capaLivro.getSubmittedFileName());
+        this.livro.setArquivo(toByteArray(this.arquivoLivro.getInputStream()));
         this.livroDAO.inserir(livro);
         
         this.limparLivro();
     }
    
     public void buscar(){
-        listaLivros = livroDAO.obterPorTitulo(textoBusca);   
+        buscar = false;
+        this.listaLivros = livroDAO.obterPorTitulo(textoBusca);   
+        this.textoBusca = "";
+
     }   
     
     public void limparLivro(){
@@ -173,5 +179,21 @@ public class LivroManagedBean {
           FacesContext context = FacesContext.getCurrentInstance(); 
           context.addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Não foi possível incluir o livro "));     
         }
+    }
+    
+    
+    public String index(){
+        buscar = true;
+        return "index?faces-redirect=true";
+    }
+    
+    public void buscarPorGenero(Genero genero){
+        buscar = false;
+        this.listaLivros = livroDAO.obterPorGenero(genero.getNome());
+    }
+    
+    public void buscarMaisComprados(){
+        buscar = false;
+        this.listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida", "DESC");
     }
 }

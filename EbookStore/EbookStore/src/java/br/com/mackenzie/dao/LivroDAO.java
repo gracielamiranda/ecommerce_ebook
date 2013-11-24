@@ -40,7 +40,7 @@ public class LivroDAO extends AbstractDAO<Livro>{
         return query.getResultList();
     }
 
-    public List<Livro> obterPorCategoria(String nomeCategoria){
+    public List<Livro> obterPorGenero(String nomeCategoria){
         Query query = em.createQuery("SELECT l FROM Livro l WHERE LOWER(l.genero.nome) LIKE LOWER(:nome)");
         query.setParameter("nome","%" + nomeCategoria + "%");
         
