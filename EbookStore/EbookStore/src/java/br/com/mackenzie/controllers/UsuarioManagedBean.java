@@ -18,7 +18,7 @@ import javax.faces.context.FacesContext;
  *
  * @author luizoscar.lima
  */
-@ManagedBean
+@ManagedBean(name = "usuarioManagedBean")
 @SessionScoped
 public class UsuarioManagedBean {
 
@@ -89,15 +89,16 @@ public class UsuarioManagedBean {
     public String urlAutenticado(){
         String url = "login?faces-redirect=true";
         if (usuarioLogado != null) {
-            if(usuarioLogado.getPerfil() == Perfil.Cliente){
                 url = "minhapagina?faces-redirect=true";
-            }else if (usuarioLogado.getPerfil() == Perfil.Administrador){
-                url = "administracao?faces-redirect=true";
-            }
         }
         
         return url;
     }
+    
+    public Boolean usuarioEhAdministrador(){
+        return this.usuarioLogado.getPerfil().equals(Perfil.Administrador);
+    }
+    
     private void inserirUsuarioAdm() {
         if(!adm) {
             Usuario usuario = new Usuario("adm@adm.com", "adm", Perfil.Administrador);
@@ -105,7 +106,10 @@ public class UsuarioManagedBean {
             adm = true;
         }
     }
-    public void logout(){
-       this.usuarioLogado = new Usuario();
+    
+    public String logout(){
+       this.usuarioLogado = null;
+       
+       return "index?faces-redirect=true";
     }
 }

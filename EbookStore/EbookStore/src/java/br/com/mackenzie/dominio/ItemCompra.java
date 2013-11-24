@@ -4,6 +4,7 @@
 package br.com.mackenzie.dominio;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -21,7 +22,7 @@ public class ItemCompra implements Serializable{
 
     @Id
     @JoinColumn(name="id_compra",columnDefinition="id")
-    @ManyToOne
+    @ManyToOne()
     private Compra compra;
 
     @Id

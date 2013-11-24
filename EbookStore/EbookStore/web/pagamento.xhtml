@@ -3,7 +3,8 @@
 <ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="./masterPage.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
     <ui:define name="content">
         <h:panelGrid  style="width: 100%">
             <h:panelGroup layout="block" class="panel panel-default texto-centralizado">
@@ -12,7 +13,7 @@
             <h:panelGroup layout="block" class="panel panel-default">  
             <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Itens da compra</strong></h:panelGroup>
             <h:panelGroup layout="block" class="panel-body">
-                <h:dataTable class="table carrinho" value="#{compraManagedBean.compra.itemCompras}" var="item">
+                <h:dataTable class="table carrinho" value="#{compraManagedBean.itensCompra}" var="item">
                         <h:column>
     				<f:facet name="header">Título</f:facet>
     				#{item.livro.titulo}
@@ -36,20 +37,20 @@
             <h:panelGroup layout="block" class="panel panel-default">  
             <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Forma de pagamento - Cartão de crédito</strong></h:panelGroup>
             <h:panelGroup layout="block" class="panel-body">
-                <h:selectOneRadio id="subscriptions" value="">
-                    <f:selectItem id="itemVisa" itemLabel="Visa" itemValue="1" />
-                    <f:selectItem id="itemMaster" itemLabel="Master" itemValue="2" />
-                </h:selectOneRadio>
-                <h:inputText  />
-                <h:selectOneMenu id="anoValidadeCartao" value="">
-                    <f:selectItem itemLabel="2013" itemValue="1" />
-                    <f:selectItem itemLabel="2014" itemValue="2" />
-                    <f:selectItem itemLabel="2015" itemValue="2" />
-                    <f:selectItem itemLabel="2016" itemValue="2" />
-                    <f:selectItem itemLabel="2017" itemValue="2" />
-                    <f:selectItem itemLabel="2018" itemValue="2" />
-                    <f:selectItem itemLabel="2019" itemValue="2" />
-                </h:selectOneMenu>
+                <h:form>
+                    <h:selectOneRadio id="subscriptions" value="#{compraManagedBean.idBandeiraSelecionada}">
+                        <f:selectItem id="itemVisa" itemLabel="Visa" itemValue="1" />
+                        <f:selectItem id="itemMaster" itemLabel="Master" itemValue="2" />
+                    </h:selectOneRadio>
+                    <h:outputLabel value="Validade" />
+                    <h:inputText pt:placeholder="mês" pt:type="number" pt:min="1" pt:max="12" value="#{compraManagedBean.compra.cartao.mesValidade}"/>
+                    <h:inputText pt:placeholder="ano" pt:type="number" pt:min="2013" value="#{compraManagedBean.compra.cartao.anoValidade}"/>
+                    <h:outputLabel value="Número do cartão"  />
+                    <h:inputText pt:placeholder="número do cartão" value="#{compraManagedBean.compra.cartao.numero}" />
+                    <h:outputLabel value="Código de segurança" />
+                    <h:inputText style="width: 60px;" value="#{compraManagedBean.compra.cartao.codigoSeguranca}" />
+                    <h:commandButton action="#{compraManagedBean.finalizarCompra()}" value="Finalizar Compra" />
+                </h:form>
             </h:panelGroup>
             </h:panelGroup>
             </h:panelGrid>
