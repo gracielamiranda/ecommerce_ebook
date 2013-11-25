@@ -10,18 +10,19 @@
             <ui:insert name="leftPessoal">
                  <h:form>
                     <ul class="nav nav-pills">
-                        <li class="active">
-                            <h:commandLink rendered="#{usuarioManagedBean.usuarioEhAdministrador()}" value="Area administrativa" action="administracao?faces-redirect=true"/>
+                        <li id="minhasCompras"><h:commandLink action="#{usuarioManagedBean.minhasCompras()}">Compras</h:commandLink></li>
+                        <li id="perfil"><h:commandLink  action="perfil?faces-redirect=true">Perfil</h:commandLink></li>
+                        <li id="areaAdministrativa">
+                            <h:commandLink rendered="#{usuarioManagedBean.usuarioEhAdministrador()}" value="Area administrativa" action="admTemplate?faces-redirect=true"/>
                         </li>
-                        <li><h:commandLink action="perfil?faces-redirect=true">Perfil</h:commandLink></li>
-                        <li><h:commandLink action="#{usuarioManagedBean.minhasCompras()}">Compras</h:commandLink></li>
-                      </ul>
+                    </ul>
                 </h:form>
+                
                 
             </ui:insert>
         </div>
         <div id="content" class="left_content">
-            <ui:insert name="contentPessoal">Content</ui:insert>
+            <ui:insert name="contentPessoal"></ui:insert>
         </div>
 
     </ui:define>

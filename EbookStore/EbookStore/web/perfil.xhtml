@@ -1,15 +1,56 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
 
         <ui:composition template="./pessoalTemplate.xhtml">
 
             <ui:define name="contentPessoal">
-                contentPessoal
+                 <h:messages  id="message" errorClass="alert alert-danger alert-dismissable" 
+                            fatalClass="alert alert-danger alert-dismissable"
+                            infoClass="alert alert-success alert-dismissable"
+                            warnClass="alert alert-warning alert-dismissable" >
+                    
+                    
+                </h:messages>
+                <br />                
+            <h:panelGrid style="width: 40%;">
+                <h:panelGroup layout="block" class="panel panel-default">  
+                  <h:panelGroup layout="block" class="panel-heading">Meu Perfil</h:panelGroup>
+                  <h:panelGroup layout="block" class="panel-body">
+                  <h:form acceptcharset="ISO-8859-1" lang="pt_BR">
+                        <div class="separacao-por-baixo">
+                            <h:inputText value="#{usuarioManagedBean.usuarioLogado.nomeCompleto}" pt:placeholder="seu nome completo" pt:required="true"/>
+                        </div>
+                        <div class="separacao-por-baixo">
+                            <h:inputText value="#{usuarioManagedBean.usuarioLogado.cpf}" readonly="true"  pt:placeholder="seu cpf" pt:required="true"/>
+                        </div>
+                        <div class="separacao-por-baixo">
+                            <h:inputText value="#{usuarioManagedBean.usuarioLogado.telefone}" pt:placeholder="seu telefone"/>
+                        </div>
+                        <div class="separacao-por-baixo">
+                            <h:inputText value="#{usuarioManagedBean.usuarioLogado.email}" readonly="true" pt:placeholder="seu e-mail" pt:type="email" pt:required="true"/>
+                        </div>
+                        <div class="separacao-por-baixo">
+                        <h:inputText value="#{usuarioManagedBean.usuarioLogado.senha}" pt:placeholder="sua senha" pt:type="password" pt:required="true"/>
+                        </div>
+                        <div class="separacao-por-baixo">
+                            <h:commandButton action="#{usuarioManagedBean.alterarUsuario()}" class="btn btn-default" value="Atualizar" />
+                        </div>
+                    </h:form>
+                  </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGrid>
+
+
+
             </ui:define>
 
         </ui:composition>
-
+     <script type="text/javascript">
+            $('#perfil').addClass('active');
+        </script>
 
 </html>

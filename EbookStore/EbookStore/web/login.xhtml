@@ -6,6 +6,13 @@
                 template="./masterPage.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
+         <h:messages  id="message" errorClass="alert alert-danger alert-dismissable" 
+                            fatalClass="alert alert-danger alert-dismissable"
+                            infoClass="alert alert-success alert-dismissable"
+                            warnClass="alert alert-warning alert-dismissable" >
+                    
+                    
+                </h:messages>
         <h:panelGrid class="lado-a-lado">
             <h:panelGroup layout="block" class="panel panel-default">  
             <h:panelGroup layout="block" class="panel-heading">Já é usuário</h:panelGroup>

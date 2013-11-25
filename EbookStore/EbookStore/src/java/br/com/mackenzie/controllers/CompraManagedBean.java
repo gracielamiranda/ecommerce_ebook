@@ -6,6 +6,7 @@ import br.com.mackenzie.dominio.Compra;
 import br.com.mackenzie.dominio.ItemCompra;
 import br.com.mackenzie.dominio.Livro;
 import br.com.mackenzie.dominio.enumeracoes.Bandeira;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -16,7 +17,7 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class CompraManagedBean {
+public class CompraManagedBean implements Serializable{
 
     private Compra compra;
     
@@ -81,7 +82,7 @@ public class CompraManagedBean {
     }
     
     public String finalizarCompra(){
-        String url = "minhapagina?faces-redirect=true";
+        String url = "minhasCompras?faces-redirect=true";
         if (compra != null) {
             Bandeira bandeira = Bandeira.Visa;
             switch(this.idBandeiraSelecionada){
@@ -105,7 +106,7 @@ public class CompraManagedBean {
             this.limparCompra();
         }
         
-        return url;
+        return usuarioManagedBean.minhasCompras();
     }
        
     public String removerItemCarrinho(ItemCompra itemCompra){

@@ -7,8 +7,11 @@ package br.com.mackenzie.controllers;
 
 import br.com.mackenzie.dao.CompraDAO;
 import br.com.mackenzie.dao.UsuarioDAO;
+import br.com.mackenzie.dominio.Compra;
 import br.com.mackenzie.dominio.Usuario;
 import br.com.mackenzie.dominio.enumeracoes.Perfil;
+import br.com.mackenzie.util.MensagemUtil;
+import java.io.Serializable;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -21,7 +24,7 @@ import javax.faces.context.FacesContext;
  */
 @ManagedBean(name = "usuarioManagedBean")
 @SessionScoped
-public class UsuarioManagedBean {
+public class UsuarioManagedBean implements Serializable{
 
     private Usuario usuarioFormulario;
     private Usuario usuarioLogado;
@@ -70,9 +73,23 @@ public class UsuarioManagedBean {
     }
 
     public void criar() {
-        usuarioFormulario.setPerfil(Perfil.Cliente);
-        this.usuarioDAO.inserir(usuarioFormulario);
-        this.limparObjetoUsuario();
+        try{
+            usuarioFormulario.setPerfil(Perfil.Cliente);
+            this.usuarioDAO.inserir(usuarioFormulario);
+            this.limparObjetoUsuario();
+            MensagemUtil.mensagemAviso("Cadastro criado com sucesso. ");
+        }catch(Exception ex){
+            MensagemUtil.mensagemErro("Não foi possível criar o usuário. ");
+        }
+    }
+    
+    public void alterarUsuario(){
+        try{
+             this.usuarioDAO.alterar(usuarioLogado);
+             MensagemUtil.mensagemAviso( "Alterado com sucesso.");        
+        }catch(Exception ex){
+            MensagemUtil.mensagemErro("Não foi possível alterar");
+        }
     }
     
     public void limparObjetoUsuario(){
@@ -93,7 +110,7 @@ public class UsuarioManagedBean {
     public String urlAutenticado(){
         String url = "login?faces-redirect=true";
         if (usuarioLogado != null) {
-                url = "minhapagina?faces-redirect=true";
+                url = "minhasCompras?faces-redirect=true";
         }
         
         return url;
@@ -117,16 +134,15 @@ public class UsuarioManagedBean {
        return "index?faces-redirect=true";
     }
     
-    public void teste(){
-        usuarioLogado =        usuarioDAO.obter(usuarioLogado.getId());
-        System.out.println("Compras : " +usuarioLogado.getCompras().size());
-    }
-    
     public String minhasCompras(){
         if (this.usuarioLogado != null) {
             this.usuarioLogado.setCompras(compraDAO.obterComprasPorUsuario(usuarioLogado));
-        }
-        
+           
+            for(Compra compra :usuarioLogado.getCompras()){
+                compra.setItemCompras(compraDAO.obterItensCompras(compra));
+            }            
+        }        
         return "minhasCompras?faces-redirect=true;";
     }
+    
 }

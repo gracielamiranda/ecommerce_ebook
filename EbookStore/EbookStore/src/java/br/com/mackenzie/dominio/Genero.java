@@ -56,7 +56,6 @@ public class Genero implements Serializable{
 
     public void setLivros(List<Livro> livros) {
         this.livros = livros;
-    }
-    
+    }  
             
 }

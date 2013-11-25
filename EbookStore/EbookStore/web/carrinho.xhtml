@@ -6,6 +6,13 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
+         <h:messages  id="message" errorClass="alert alert-danger alert-dismissable" 
+                            fatalClass="alert alert-danger alert-dismissable"
+                            infoClass="alert alert-success alert-dismissable"
+                            warnClass="alert alert-warning alert-dismissable" >
+                    
+                    
+                </h:messages>
         <h:form>
             <h:panelGrid  style="width: 100%">
                 <h:panelGroup layout="block" rendered="#{compraManagedBean.itensCompra.size() > 0? false : true}" class="alert alert-warning texto-centralizado">

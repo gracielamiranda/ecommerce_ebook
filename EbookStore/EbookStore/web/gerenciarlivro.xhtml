@@ -8,11 +8,19 @@
                 template="./admTemplate.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="contentAdm">
+         <h:messages  id="message" errorClass="alert alert-danger alert-dismissable" 
+                            fatalClass="alert alert-danger alert-dismissable"
+                            infoClass="alert alert-success alert-dismissable"
+                            warnClass="alert alert-warning alert-dismissable" >
+                    
+                    
+                </h:messages>
+       <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" lang="pt_BR">
+
         <h:panelGrid style="width: 40%;">
         <h:panelGroup layout="block" class="panel panel-default">  
         <h:panelGroup layout="block" class="panel-heading">Cadastro livro</h:panelGroup>
         <h:panelGroup layout="block" class="panel-body">
-            <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" lang="pt_BR">
                     <div style="width: 130px;text-align:left;float:left;;float:left;">
                         <h:outputLabel value="Título:" for="titulo" />
                     </div> 
@@ -93,7 +101,6 @@
                     <h:commandButton action="#{livroManagedBean.salvarLivro()}" class="btn btn-default" value="salvar" />
                     <h:commandButton action="#{livroManagedBean.limparLivro()}" class="btn btn-default" value="limpar" />
                     </div>
-            </h:form>
         </h:panelGroup>
         </h:panelGroup>
         </h:panelGrid>
@@ -114,7 +121,15 @@
                 <f:facet name="header">Editora</f:facet>
                 #{livro.autor.nome}
             </h:column>
+            <h:column>
+                                <f:facet name="header">Excluir</f:facet>
+                                <h:commandLink action="#{livroManagedBean.removerLivro(livro)}">
+                                    <h:graphicImage library="images" name="delete-16.png" />
+                                </h:commandLink>
+             </h:column>
         </h:dataTable>
+      </h:form>
+
         <script type="text/javascript">
             $('#gerenciarLivro').addClass('active');
         </script>

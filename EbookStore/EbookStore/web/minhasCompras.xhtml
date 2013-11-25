@@ -6,18 +6,35 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
-
+        
         <ui:composition template="./pessoalTemplate.xhtml">
             <ui:define name="contentPessoal">
+                 <h:messages  id="message" errorClass="alert alert-danger alert-dismissable" 
+                            fatalClass="alert alert-danger alert-dismissable"
+                            infoClass="alert alert-success alert-dismissable"
+                            warnClass="alert alert-warning alert-dismissable" >
+                    
+                    
+                </h:messages>
+                <br />
+                <h:form>
                 <h:panelGroup layout="block" rendered="#{usuarioManagedBean.usuarioLogado.compras.size() > 0 ? false:true}" class="alert alert-warning texto-centralizado">
                     #{bundle.ComprasVazio}
                 </h:panelGroup>
                 
                  <h:panelGroup layout="block" rendered="#{usuarioManagedBean.usuarioLogado.compras.size() > 0 ? true:false}">
+                    
                      <ui:repeat value="#{usuarioManagedBean.usuarioLogado.compras}" var="compra" >
-                       <h:panelGroup layout="block" class="panel-group"><strong>Carrinho de compras</strong></h:panelGroup>
-
-                                <h:dataTable class="table carrinho" value="#{compra.itemCompras}" var="item">
+                        <h:panelGroup layout="block" class="panel panel-default">  
+                        <h:panelGroup layout="block" class="panel-heading texto-centralizado">
+                            <strong>
+                                <h:outputText value="#{compra.dataCompra.time}">  
+                                      <f:convertDateTime type="date" dateStyle="short" pattern="dd/MM/yyyy HH:mm"/>  
+                                       </h:outputText>
+                            </strong></h:panelGroup>
+                        
+                             
+                         <h:dataTable class="table carrinho" value="#{compra.itemCompras}" var="item">
                                 <h:column>
                                         <f:facet name="header">Título</f:facet>
                                         #{item.livro.titulo}
@@ -27,25 +44,27 @@
                                         #{item.livro.genero.nome}
                                 </h:column>
                                 <h:column>
-                                        <f:facet name="header">Preço</f:facet>
-                                        #{item.livro.preco}
-                                </h:column>
-                                <h:column>
                                         <f:facet name="header">Quantidade</f:facet>
                                         #{item.qtde}
                                 </h:column>
                                 <h:column>
+                                        <f:facet name="header">Preço</f:facet>
+                                        #{item.livro.preco}
+                                </h:column>
+                                <h:column>
+                                         <f:facet name="header">Download</f:facet>
+                                         <h:commandButton value="Download" class="btn btn-default" action="#{livroManagedBean.download(item.livro)}"/>
                                 </h:column>
                              </h:dataTable>
-                    </ui:repeat>
-                </h:panelGroup>
-                
-            <h:form>
-                <h:commandButton action="#{usuarioManagedBean.teste()}" value="teste"/>
-                kkk
-            </h:form>
+                            </h:panelGroup>
+                        </ui:repeat>
+                     
+                 </h:panelGroup>
+                </h:form>
             </ui:define>
         </ui:composition>
-
+        <script type="text/javascript">
+            $('#minhasCompras').addClass('active');
+        </script>
     </body>
 </html>

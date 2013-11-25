@@ -11,6 +11,7 @@ import br.com.mackenzie.dao.UsuarioDAO;
 import br.com.mackenzie.dominio.Genero;
 import br.com.mackenzie.dominio.Usuario;
 import br.com.mackenzie.dominio.enumeracoes.Perfil;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -23,7 +24,7 @@ import javax.faces.bean.SessionScoped;
  */
 @ManagedBean
 @SessionScoped
-public class HomeManagedBean {
+public class HomeManagedBean implements Serializable{
 
     private List<Genero> listaGenero =  new ArrayList<Genero>();
     private String textoBusca;

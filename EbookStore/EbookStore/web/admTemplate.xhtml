@@ -8,6 +8,7 @@
     <ui:define name="contentPessoal">
         <div id="topAdm" >
             <ui:insert name="topAdm">
+                <br />
                 <nav class="navbar navbar-default" role="navigation" style="min-height: 25px;;height: 42px;">
                 <div class="navbar-header" id="bs-example-navbar-collapse-1">
                     <h:form>
@@ -29,14 +30,14 @@
                 </div>
               </nav>
             </ui:insert>
-        </div>
-        
-       
+        </div>    
 
         <div id="contentAdm" >
             <ui:insert name="contentAdm"></ui:insert>
         </div>
-
+        <script type="text/javascript">
+            $('#areaAdministrativa').addClass('active');
+        </script>
     </ui:define>
     </ui:composition>
 </html>

@@ -9,10 +9,12 @@ package br.com.mackenzie.controllers;
 import br.com.mackenzie.dao.AutorDAO;
 import br.com.mackenzie.dao.EditoraDAO;
 import br.com.mackenzie.dao.GeneroDAO;
+import br.com.mackenzie.dao.ItemCompraDAO;
 import br.com.mackenzie.dao.LivroDAO;
 import br.com.mackenzie.dominio.Genero;
 import br.com.mackenzie.dominio.Livro;
-import static com.google.common.io.ByteStreams.toByteArray;
+import br.com.mackenzie.util.MensagemUtil;
+import com.google.common.io.ByteStreams;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
@@ -22,9 +24,9 @@ import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
+import java.io.Serializable;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 /**
@@ -33,7 +35,7 @@ import javax.servlet.http.Part;
  */
 @ManagedBean
 @SessionScoped
-public class LivroManagedBean {
+public class LivroManagedBean implements Serializable{
 
     private final String PATH_IMAGES =  FacesContext.getCurrentInstance().getExternalContext().getRealPath("") + "/resources/images/";  
     private String editoraSelecionadaId;
@@ -55,6 +57,8 @@ public class LivroManagedBean {
     private GeneroDAO generoDAO;
     @EJB
     private AutorDAO autorDAO;
+    @EJB
+    private ItemCompraDAO itemCompraDAO;
    
     public LivroManagedBean() {
         this.livro = new Livro();
@@ -137,15 +141,21 @@ public class LivroManagedBean {
     }
        
     public void salvarLivro() throws IOException{
-        this.livro.setGenero(generoDAO.obter(Integer.parseInt(this.generoSelecionadoId)));
-        this.livro.setAutor(autorDAO.obter(Integer.parseInt(this.autorSelecionadoId)));
-        this.livro.setEditora(editoraDAO.obter(Integer.parseInt(this.editoraSelecionadaId)));
-        salvarCapa(capaLivro);
-        this.livro.setCapa(capaLivro.getSubmittedFileName());
-        this.livro.setArquivo(toByteArray(this.arquivoLivro.getInputStream()));
-        this.livroDAO.inserir(livro);
-        
-        this.limparLivro();
+        try{
+            this.livro.setGenero(generoDAO.obter(Integer.parseInt(this.generoSelecionadoId)));
+
+            this.livro.setAutor(autorDAO.obter(Integer.parseInt(this.autorSelecionadoId)));
+            this.livro.setEditora(editoraDAO.obter(Integer.parseInt(this.editoraSelecionadaId)));
+            salvarCapa(capaLivro);
+            this.livro.setCapa(capaLivro.getSubmittedFileName());
+            this.livro.setArquivo(ByteStreams.toByteArray(this.arquivoLivro.getInputStream()));
+            this.livroDAO.inserir(livro);
+
+            this.limparLivro();
+            MensagemUtil.mensagemAviso("Cadastro incluido com sucesso. ");
+        }catch(Exception e){
+            MensagemUtil.mensagemErro("Não foi possível concluir o cadastro. ");
+        }
     }
    
     public void buscar(){
@@ -166,12 +176,11 @@ public class LivroManagedBean {
         try{
             File file = new File(PATH_IMAGES, capa.getSubmittedFileName());
             FileOutputStream os = new FileOutputStream(file);
-            os.write(toByteArray(capa.getInputStream()));
+            os.write(ByteStreams.toByteArray(capa.getInputStream()));
             os.flush();
             os.close();
         }catch(IOException io){
-          FacesContext context = FacesContext.getCurrentInstance(); 
-          context.addMessage(null, new FacesMessage(FacesMessage.FACES_MESSAGES, "Não foi possível incluir o livro "));     
+            MensagemUtil.mensagemErro("Não foi possível incluir o livro ");     
         }
     }
     
@@ -186,6 +195,40 @@ public class LivroManagedBean {
     }
     
     public void buscarMaisComprados(){
+        
         this.listaLivros = livroDAO.obterLivrosOrdenados(primeiroResultado, resultadoMaximo, "qtdeVendida", "DESC");
+    }
+   
+    public void download(Livro l ){
+        
+        try {		
+                HttpServletResponse response = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+
+                response.reset();  
+                response.setContentType("application/force-download");  
+                response.setHeader("Content-Disposition", "attachment;filename=\""+ l.getTitulo()+ ".pdf\";");  
+                response.setContentLength(l.getArquivo().length);
+
+                response.getOutputStream().write(l.getArquivo(), 0, l.getArquivo().length);  
+                response.getOutputStream().flush();
+        } catch (IOException e) {
+            
+        }
+
+    }
+    
+    public void removerLivro(Livro livro){
+        try{
+            if(itemCompraDAO.obterPorLivro(livro).isEmpty()){
+                livroDAO.remover(livro);
+                MensagemUtil.mensagemAviso("Livro removido com sucesso. ");
+            }else{
+                MensagemUtil.mensagemErro("Esse livro não pode ser removido pois há compras relacionadas a este item. ");
+            }
+        }catch(Exception e){
+                        MensagemUtil.mensagemErro("Não foi possível remover o item. ");
+
+        }
+        
     }
 }

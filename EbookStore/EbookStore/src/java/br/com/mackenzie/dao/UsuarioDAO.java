@@ -23,7 +23,7 @@ public class UsuarioDAO extends AbstractDAO<Usuario>{
     }
     
     public Usuario obterPorEmail(String email){
-        Query query = em.createQuery("SELECT u FROM Usuario u WHERE u.email = :email");
+        Query query = em.createQuery("SELECT u FROM Usuario u JOIN FETCH u.compras WHERE u.email = :email");
         query.setParameter("email",email);
         
         return (Usuario)query.getSingleResult();

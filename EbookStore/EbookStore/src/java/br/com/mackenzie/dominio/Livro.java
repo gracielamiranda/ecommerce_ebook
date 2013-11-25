@@ -56,11 +56,7 @@ public class Livro implements Serializable{
     @ManyToOne
     private Autor autor;
     
-    @OneToOne(cascade = CascadeType.ALL)
-    private EstoqueLivro estoqueLivro;
-    
     public Livro() {
-        this.estoqueLivro = new EstoqueLivro();
     }
 
     
@@ -164,17 +160,9 @@ public class Livro implements Serializable{
     public Autor getAutor() {
         return autor;
     }
-
+    
     public void setAutor(Autor autor) {
         this.autor = autor;
-    }
-
-    public EstoqueLivro getEstoqueLivro() {
-        return estoqueLivro;
-    }
-
-    public void setEstoqueLivro(EstoqueLivro estoqueLivro) {
-        this.estoqueLivro = estoqueLivro;
     }
        
 }
