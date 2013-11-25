@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
@@ -23,7 +24,7 @@ public class Usuario extends Pessoa implements Serializable{
     
     private String senha;
     
-    @OneToMany(mappedBy="usuario")
+    @OneToMany(mappedBy="usuario",fetch = FetchType.LAZY)
     private List<Compra> compras; 
     
     @Enumerated

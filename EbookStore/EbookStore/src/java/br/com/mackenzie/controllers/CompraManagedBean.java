@@ -137,5 +137,6 @@ public class CompraManagedBean {
        this.itensCompra = new ArrayList<ItemCompra>();
         this.compra = new Compra(); 
     }
+   
     
 }

@@ -112,4 +112,9 @@ public class UsuarioManagedBean {
        
        return "index?faces-redirect=true";
     }
+    
+    public void teste(){
+        usuarioLogado =        usuarioDAO.obter(usuarioLogado.getId());
+        System.out.println("Compras : " +usuarioLogado.getCompras().size());
+    }
 }

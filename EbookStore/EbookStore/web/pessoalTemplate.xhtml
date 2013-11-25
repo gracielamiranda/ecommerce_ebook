@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+  <ui:composition template="./masterPage.xhtml">
+ 
+    <ui:define name="content">
+        <div id="leftPessoal">
+            <ui:insert name="leftPessoal">
+                 <h:form>
+                    <ul class="nav nav-pills">
+                        <li class="active">
+                            <h:commandLink rendered="#{usuarioManagedBean.usuarioEhAdministrador()}" value="Area administrativa" action="administracao?faces-redirect=true"/>
+                        </li>
+                        <li><h:commandLink action="perfil">Perfil</h:commandLink></li>
+                        <li><h:commandLink action="minhasCompras">Compras</h:commandLink></li>
+                      </ul>
+                </h:form>
+                
+            </ui:insert>
+        </div>
+        <div id="content" class="left_content">
+            <ui:insert name="contentPessoal">Content</ui:insert>
+        </div>
+
+    </ui:define>
+   </ui:composition>
+
+</html>
