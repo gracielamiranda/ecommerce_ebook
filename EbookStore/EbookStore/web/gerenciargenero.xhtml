@@ -35,6 +35,12 @@
                     <f:facet name="header">Nome</f:facet>
                     #{genero.nome}
                 </h:column>
+                 <h:column>
+                                <f:facet name="header">Excluir</f:facet>
+                                <h:commandLink action="#{generoManagedBean.removerGenero(genero)}">
+                                    <h:graphicImage library="images" name="delete-16.png" />
+                                </h:commandLink>
+                 </h:column>
             </h:dataTable>
         </h:form>
         <script type="text/javascript">

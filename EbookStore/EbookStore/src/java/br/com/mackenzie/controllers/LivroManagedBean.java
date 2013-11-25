@@ -41,7 +41,7 @@ public class LivroManagedBean implements Serializable{
     private String editoraSelecionadaId;
     private String generoSelecionadoId;
     private String autorSelecionadoId;
-    private List<Livro> listaLivros = new ArrayList<Livro>();
+    private List<Livro> listaLivros;
     private String textoBusca;
     private Livro livro;
     private int primeiroResultado;
@@ -62,6 +62,7 @@ public class LivroManagedBean implements Serializable{
    
     public LivroManagedBean() {
         this.livro = new Livro();
+        this.listaLivros = new ArrayList<Livro>();
     }
 
     public List<Livro> getListaLivros() {      
@@ -160,7 +161,6 @@ public class LivroManagedBean implements Serializable{
    
     public void buscar(){
         this.listaLivros = livroDAO.obterPorTitulo(textoBusca);   
-        this.textoBusca = "";
 
     }   
     

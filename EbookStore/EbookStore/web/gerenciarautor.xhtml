@@ -34,6 +34,12 @@
                 <f:facet name="header">Nome</f:facet>
                 #{autor.nome}
             </h:column>
+             <h:column>
+                                <f:facet name="header">Excluir</f:facet>
+                                <h:commandLink action="#{autorManagedBean.removerAutor(autor)}">
+                                    <h:graphicImage library="images" name="delete-16.png" />
+                                </h:commandLink>
+             </h:column>
         </h:dataTable>
         </h:form>
         <script type="text/javascript">
