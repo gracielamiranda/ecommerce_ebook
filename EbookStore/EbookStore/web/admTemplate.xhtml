@@ -8,28 +8,25 @@
     <ui:define name="contentPessoal">
         <div id="topAdm" >
             <ui:insert name="topAdm">
-                <nav class="navbar navbar-default" role="navigation">
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <nav class="navbar navbar-default" role="navigation" style="min-height: 25px;;height: 42px;">
+                <div class="navbar-header" id="bs-example-navbar-collapse-1">
                     <h:form>
-                    <ul class="nav navbar-nav">
-                         <li>
-                          <h:commandLink value="Gerenciar Gênero" action="gerenciargenero"/>
+                    <ul class="nav nav-pills">
+                         <li id="gerenciarGenero">
+                          <h:commandLink value="Gerenciar Gênero" action="gerenciargenero?faces-redirect=true"/>
                           </li>
-                          <li>
-                          <h:commandLink value="Gerenciar Autor" action="gerenciarautor"/>
+                          <li id="gerenciarAutor">
+                          <h:commandLink value="Gerenciar Autor" action="gerenciarautor?faces-redirect=true"/>
                           </li>
-                          <li>
-                          <h:commandLink value="Gerenciar Editora" action="gerenciareditora"/>
+                          <li id="gerenciarEditora">
+                          <h:commandLink value="Gerenciar Editora" action="gerenciareditora?faces-redirect=true"/>
                           </li>
-                          <li>
-                          <h:commandLink value="Gerenciar Livro" action="gerenciarlivro"/>
+                          <li id="gerenciarLivro">
+                            <h:commandLink value="Gerenciar Livro" action="gerenciarlivro?faces-redirect=true"/>
                           </li>
                     </ul>                       
                     </h:form>
-
-                 
-                </div><!-- /.navbar-collapse -->
+                </div>
               </nav>
             </ui:insert>
         </div>

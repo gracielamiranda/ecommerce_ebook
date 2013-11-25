@@ -13,8 +13,8 @@
                         <li class="active">
                             <h:commandLink rendered="#{usuarioManagedBean.usuarioEhAdministrador()}" value="Area administrativa" action="administracao?faces-redirect=true"/>
                         </li>
-                        <li><h:commandLink action="perfil">Perfil</h:commandLink></li>
-                        <li><h:commandLink action="minhasCompras">Compras</h:commandLink></li>
+                        <li><h:commandLink action="perfil?faces-redirect=true">Perfil</h:commandLink></li>
+                        <li><h:commandLink action="#{usuarioManagedBean.minhasCompras()}">Compras</h:commandLink></li>
                       </ul>
                 </h:form>
                 

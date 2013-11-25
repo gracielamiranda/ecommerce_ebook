@@ -97,6 +97,11 @@ a:link:hover, a:visited:hover  {
     margin-bottom: 10px;
 }
 
+.separacao-lat-direira10
+{
+    margin-right: 5px;
+}
+
 .lado-a-lado
 {
     float:left;
@@ -115,4 +120,32 @@ a:link:hover, a:visited:hover  {
 .texto-centralizado
 {
     text-align:center;
+}
+
+.link-logout
+{
+    color: #428bca !important;
+    text-decoration: none !important;
+}
+
+.link-logout:hover
+.link-logout:focus
+{
+    color: #2a6496 !important;
+    text-decoration: underline !important;
+}
+
+.link-logout:focus
+{
+    outline: thin dotted #333 !important;
+    outline: 5px auto -webkit-focus-ring-color !important;
+    outline-offset: -2px !important;
+}
+
+.espaco-lat-dir-10{
+    padding-right: 10px;
+}
+
+.select > input{
+    margin-right: 10px;
 }

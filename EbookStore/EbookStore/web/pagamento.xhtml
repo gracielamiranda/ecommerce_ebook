@@ -4,55 +4,85 @@
                 template="./masterPage.xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="content">
         <h:panelGrid  style="width: 100%">
-            <h:panelGroup layout="block" class="panel panel-default texto-centralizado">
-                <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Pagamento</strong></h:panelGroup>
-            </h:panelGroup>
-            <h:panelGroup layout="block" class="panel panel-default">  
-            <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Itens da compra</strong></h:panelGroup>
-            <h:panelGroup layout="block" class="panel-body">
-                <h:dataTable class="table carrinho" value="#{compraManagedBean.itensCompra}" var="item">
-                        <h:column>
-    				<f:facet name="header">Título</f:facet>
-    				#{item.livro.titulo}
-    			</h:column>
- 
-    			<h:column>
-    				<f:facet name="header">Gênero</f:facet>
-    				#{item.livro.genero.nome}
-    			</h:column>
-    			<h:column>
-    				<f:facet name="header">Quantidade</f:facet>
-    				#{item.qtde}
-    			</h:column>
-                        <h:column>
-    				<f:facet name="header">Preço</f:facet>
-    				#{item.livro.preco}
-    			</h:column>
-                </h:dataTable>
-            </h:panelGroup>
-            </h:panelGroup>
-            <h:panelGroup layout="block" class="panel panel-default">  
-            <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Forma de pagamento - Cartão de crédito</strong></h:panelGroup>
-            <h:panelGroup layout="block" class="panel-body">
-                <h:form>
-                    <h:selectOneRadio id="subscriptions" value="#{compraManagedBean.idBandeiraSelecionada}">
-                        <f:selectItem id="itemVisa" itemLabel="Visa" itemValue="1" />
-                        <f:selectItem id="itemMaster" itemLabel="Master" itemValue="2" />
-                    </h:selectOneRadio>
-                    <h:outputLabel value="Validade" />
-                    <h:inputText pt:placeholder="mês" pt:type="number" pt:min="1" pt:max="12" value="#{compraManagedBean.compra.cartao.mesValidade}"/>
-                    <h:inputText pt:placeholder="ano" pt:type="number" pt:min="2013" value="#{compraManagedBean.compra.cartao.anoValidade}"/>
-                    <h:outputLabel value="Número do cartão"  />
-                    <h:inputText pt:placeholder="número do cartão" value="#{compraManagedBean.compra.cartao.numero}" />
-                    <h:outputLabel value="Código de segurança" />
-                    <h:inputText style="width: 60px;" value="#{compraManagedBean.compra.cartao.codigoSeguranca}" />
-                    <h:commandButton action="#{compraManagedBean.finalizarCompra()}" value="Finalizar Compra" />
-                </h:form>
-            </h:panelGroup>
-            </h:panelGroup>
-            </h:panelGrid>
+            <h:form>
+                <h:panelGroup layout="block" class="panel panel-default texto-centralizado">
+                    <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Pagamento</strong></h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="panel panel-default text-right">
+                    <h:commandLink class="btn btn-default" value="Continuar comprando" action="index?faces-redirect=true;"/>
+                    <h:commandButton action="#{compraManagedBean.finalizarCompra()}" class="btn btn-default" value="Finalizar Compra" />
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="panel panel-default">  
+                <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Itens da compra</strong></h:panelGroup>
+                <h:panelGroup layout="block" class="panel-body">
+                    <h:dataTable class="table carrinho" value="#{compraManagedBean.itensCompra}" var="item">
+                            <h:column>
+                                    <f:facet name="header">Título</f:facet>
+                                    #{item.livro.titulo}
+                            </h:column>
+
+                            <h:column>
+                                    <f:facet name="header">Gênero</f:facet>
+                                    #{item.livro.genero.nome}
+                            </h:column>
+                            <h:column>
+                                    <f:facet name="header">Quantidade</f:facet>
+                                    #{item.qtde}
+                            </h:column>
+                            <h:column>
+                                    <f:facet name="header">Preço</f:facet>
+                                    #{item.livro.preco}
+                            </h:column>
+                            <f:facet name="footer">
+                                <h:panelGroup layout="block" class="panel-heading text-right">
+                                    <h:outputLabel value="Total da compra:#{compraManagedBean.valorTotalCompra()}"/>
+                                </h:panelGroup>
+                            </f:facet>
+                    </h:dataTable>
+                </h:panelGroup>
+                </h:panelGroup>
+            
+                <h:panelGroup layout="block" class="panel panel-default">  
+                <h:panelGroup layout="block" class="panel-heading texto-centralizado"><strong>Forma de pagamento - Cartão de crédito</strong></h:panelGroup>
+                <h:panelGroup layout="block" class="panel-body">
+                    <ul class="list-unstyled">
+                        <li>
+                            <fieldset style="width: 25%">
+                                <legend>Cartão de crédito</legend>
+                                <h:selectOneRadio id="subscriptions" class="select" value="#{compraManagedBean.idBandeiraSelecionada}" style="width: 100%">
+                                        <f:selectItem id="itemVisa" itemLabel="Visa" itemValue="1" />
+                                        <f:selectItem id="itemMaster" itemLabel="Master" itemValue="2" />
+                                </h:selectOneRadio>
+                            </fieldset>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <div class="lado-a-lado separacao-lat-direira10 select">
+                                <h:outputLabel value="Validade" /><br/>
+                                <h:inputText pt:placeholder="mês" pt:type="number" pt:min="1" pt:max="12" pt:required="true" style="width: 50px;" value="#{compraManagedBean.compra.cartao.mesValidade}"/>
+                                <h:inputText pt:placeholder="ano" pt:type="number" pt:min="2013" pt:required="true" style="width: 80px;" value="#{compraManagedBean.compra.cartao.anoValidade}"/>
+                            </div>
+                            <div class="lado-a-lado separacao-lat-direira10">
+                                <h:outputLabel value="Número do cartão"  /><br/>
+                                <h:inputText pt:placeholder="número do cartão" maxlength="16" style="width: 200px" pt:required="true" value="#{compraManagedBean.compra.cartao.numero}" />
+                            </div>
+                            <div class="separacao-lat-direira10">
+                                <h:outputLabel value="Código segurança"  /><br/>
+                                <h:inputText style="width: 60px;" pt:required="true" maxlength="3" value="#{compraManagedBean.compra.cartao.codigoSeguranca}" />
+                            </div>
+                        </li>       
+                    </ul>
+                </h:panelGroup>
+                </h:panelGroup>
+                <h:panelGroup layout="block" class="panel panel-default text-right">
+                    <h:commandLink class="btn btn-default" value="Continuar comprando" action="index?faces-redirect=true;"/>
+                    <h:commandButton action="#{compraManagedBean.finalizarCompra()}" class="btn btn-default" value="Finalizar Compra" />
+                </h:panelGroup>
+            </h:form>
+        </h:panelGrid>
     </ui:define>
 </ui:composition>

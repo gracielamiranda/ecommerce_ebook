@@ -9,7 +9,7 @@
                 xmlns="http://www.w3.org/1999/xhtml">
     <ui:define name="contentAdm">
         <h:panelGrid style="width: 40%;">
-        <h:panelGroup layout="block" class="panel panel-primary">  
+        <h:panelGroup layout="block" class="panel panel-default">  
         <h:panelGroup layout="block" class="panel-heading">Cadastro livro</h:panelGroup>
         <h:panelGroup layout="block" class="panel-body">
             <h:form enctype="multipart/form-data" acceptcharset="ISO-8859-1" lang="pt_BR">
@@ -63,6 +63,13 @@
                     </div>
                     <br/>
                     <div style="width: 130px;text-align:left;float:left;;">
+                    <h:outputLabel value="Quantidade em estoque" for="qtdEstoque" />
+                    </div>
+                    <div>
+                        <h:inputText value="#{livroManagedBean.livro.estoqueLivro.qtdeDisponivel}" style="width: 50px" title="quantidade em estoque" pt:required="true" />
+                    </div>
+                    <br/>
+                    <div style="width: 130px;text-align:left;float:left;;">
                     <h:outputLabel value="Genero:" for="genero" />
                     </div>
                     <div>
@@ -97,5 +104,26 @@
         </h:panelGroup>
         </h:panelGroup>
         </h:panelGrid>
+        <h:dataTable var="livro" value="#{livroManagedBean.listaLivros}" class="table">
+            <h:column>
+                <f:facet name="header">Titulo</f:facet>
+                #{livro.titulo}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Autor</f:facet>
+                #{livro.autor.nome}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Gênero</f:facet>
+                #{livro.genero.nome}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Editora</f:facet>
+                #{livro.autor.nome}
+            </h:column>
+        </h:dataTable>
+        <script type="text/javascript">
+            $('#gerenciarLivro').addClass('active');
+        </script>
     </ui:define>
 </ui:composition>

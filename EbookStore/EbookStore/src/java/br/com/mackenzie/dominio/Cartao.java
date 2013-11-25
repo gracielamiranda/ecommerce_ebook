@@ -27,7 +27,7 @@ public class Cartao implements Serializable{
     @Column(name = "ano_validade")
     private int anoValidade;
     
-    private int numero;
+    private long numero;
            
     @Column(name = "codigo_seguranca")
     private int codigoSeguranca;
@@ -70,11 +70,11 @@ public class Cartao implements Serializable{
         this.anoValidade = anoValidade;
     }
 
-    public int getNumero() {
+    public long getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(long numero) {
         this.numero = numero;
     }
     

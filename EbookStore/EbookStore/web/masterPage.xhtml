@@ -46,8 +46,15 @@
                             <h:commandButton action="#{livroManagedBean.buscar()}" class="btn btn-default" value="buscar" />
                     </div>
                   <ul class="nav navbar-nav navbar-right navegacao-direita">
-                      <li><h:commandLink action="#{usuarioManagedBean.urlAutenticado()}">Olá #{usuarioManagedBean.loginUsuario}</h:commandLink></li>
-                      <h:commandLink action="#{usuarioManagedBean.logout()}" value="logout" />
+                      <li>
+                          <h:commandLink class="link-dropdown" action="#{usuarioManagedBean.urlAutenticado()}"> 
+                              <h:outputLabel value="Olá #{usuarioManagedBean.loginUsuario}  &nbsp;"/> 
+                              <h:outputLabel value=" faça seu login ou cadastre-se" rendered="#{usuarioManagedBean.usuarioLogado == null}" />
+                          </h:commandLink>
+                      </li>
+                      <li>
+                          <h:commandLink class="link-logout" action="#{usuarioManagedBean.logout()}" rendered="#{usuarioManagedBean.usuarioLogado != null}" value="Sair" />
+                      </li>
                       <li>
                           <a href="carrinho.xhtml"> 
                             <h:graphicImage library="images" name="carrinho.png" /> 

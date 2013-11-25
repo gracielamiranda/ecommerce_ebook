@@ -5,6 +5,7 @@
  */
 package br.com.mackenzie.controllers;
 
+import br.com.mackenzie.dao.CompraDAO;
 import br.com.mackenzie.dao.UsuarioDAO;
 import br.com.mackenzie.dominio.Usuario;
 import br.com.mackenzie.dominio.enumeracoes.Perfil;
@@ -26,6 +27,9 @@ public class UsuarioManagedBean {
     private Usuario usuarioLogado;
     @EJB
     private UsuarioDAO usuarioDAO;
+    @EJB
+    private CompraDAO compraDAO;
+    
     private boolean adm;
 
     public UsuarioManagedBean() {
@@ -116,5 +120,13 @@ public class UsuarioManagedBean {
     public void teste(){
         usuarioLogado =        usuarioDAO.obter(usuarioLogado.getId());
         System.out.println("Compras : " +usuarioLogado.getCompras().size());
+    }
+    
+    public String minhasCompras(){
+        if (this.usuarioLogado != null) {
+            this.usuarioLogado.setCompras(compraDAO.obterComprasPorUsuario(usuarioLogado));
+        }
+        
+        return "minhasCompras?faces-redirect=true;";
     }
 }

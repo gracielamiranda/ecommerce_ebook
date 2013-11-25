@@ -6,6 +6,7 @@ package br.com.mackenzie.dominio;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -55,10 +56,11 @@ public class Livro implements Serializable{
     @ManyToOne
     private Autor autor;
     
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private EstoqueLivro estoqueLivro;
     
     public Livro() {
+        this.estoqueLivro = new EstoqueLivro();
     }
 
     
