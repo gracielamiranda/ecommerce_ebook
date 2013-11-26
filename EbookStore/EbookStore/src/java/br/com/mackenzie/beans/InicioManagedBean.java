@@ -42,7 +42,7 @@ public class InicioManagedBean implements Serializable{
         
         Livro livro = new Livro("Chico bento", 100, "Ingles", "um livro muito legal do chico bento", 29.90, 30);
         livro.setGenero(genero);
-        livro.setCapa("carrinho.png");
+        livro.setCapa("imagem-padrao300x200.png");
         try {
                 FileInputStream fis = new FileInputStream("C:/teste.pdf");  
                         
@@ -53,7 +53,7 @@ public class InicioManagedBean implements Serializable{
          }
         
         Livro livro1 = new Livro("Turma da monica", 100, "Ingles", "um livro muito legal da turma da monica", 29.90, 2);
-        livro1.setCapa("carrinho.png");
+        livro1.setCapa("imagem-padrao300x200.png");
         livro1.setGenero(genero2);
         
         try {
@@ -66,7 +66,7 @@ public class InicioManagedBean implements Serializable{
          }
 
         Livro livro2 = new Livro("Os coisas", 100, "Ingles", "um livro muito legal dos coisas", 29.90, 100);
-        livro2.setCapa("carrinho.png");
+        livro2.setCapa("imagem-padrao300x200.png");
         livro2.setGenero(genero);
         try {
                 FileInputStream fis = new FileInputStream("C:/teste.pdf");  
@@ -77,7 +77,7 @@ public class InicioManagedBean implements Serializable{
                  
          }
         Livro livro3 = new Livro("Xando o Filme", 100, "Ingles", "um livro muito legal xando o filme", 29.90, 0);        
-        livro3.setCapa("carrinho.png");
+        livro3.setCapa("imagem-padrao300x200.png");
         livro3.setGenero(genero2);
         try {
                 FileInputStream fis = new FileInputStream("C:/teste.pdf");  
@@ -88,7 +88,7 @@ public class InicioManagedBean implements Serializable{
                  
          }
         Livro livro4 = new Livro("Vc eh doida demais", 100, "Ingles", "um livro muito legal vc é doida demais", 29.90, 0);
-        livro4.setCapa("carrinho.png");
+        livro4.setCapa("imagem-padrao300x200.png");
         livro4.setGenero(genero);
         try {
                 FileInputStream fis = new FileInputStream("C:/teste.pdf");  

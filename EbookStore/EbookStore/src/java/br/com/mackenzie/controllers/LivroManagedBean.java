@@ -20,7 +20,6 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import com.google.gson.Gson;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,6 +43,7 @@ public class LivroManagedBean implements Serializable{
     private List<Livro> listaLivros;
     private String textoBusca;
     private Livro livro;
+    private Livro livroModal;
     private int primeiroResultado;
     private int resultadoMaximo = 10 ;
     private Part arquivoLivro;
@@ -140,6 +140,14 @@ public class LivroManagedBean implements Serializable{
     public void setCapaLivro(Part capaLivro) {
         this.capaLivro = capaLivro;
     }
+
+    public Livro getLivroModal() {
+        return livroModal;
+    }
+
+    public void setLivroModal(Livro livroModal) {
+        this.livroModal = livroModal;
+    }
        
     public void salvarLivro() throws IOException{
         try{
@@ -167,10 +175,6 @@ public class LivroManagedBean implements Serializable{
     public void limparLivro(){
         this.setLivro(new Livro());
     }
-    
-    public String transformarObjetoEmJson(Livro livro){
-        return new Gson().toJson(livro);
-    }    
 
     private void salvarCapa(Part capa) {
         try{
@@ -230,5 +234,9 @@ public class LivroManagedBean implements Serializable{
 
         }
         
+    }
+    
+    public final void preencherModal(Livro livro){
+        this.livroModal = livro;
     }
 }

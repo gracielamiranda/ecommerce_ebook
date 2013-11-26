@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <body>
         <ui:composition template="./masterPage.xhtml">
@@ -25,32 +26,49 @@
                                     <h:graphicImage id="imgProduto" library="images" name="#{livro.capa}" width="300px" height="200px" alt="..."  />
                                     <div class="caption">
                                         <h:outputText value="#{livro.titulo}" /><br />
-                                        <h:outputText value="#{livro.preco}"/>
+                                        <h:outputText value="R$#{livro.preco}"/>
                                         <p>
-                                            <h:commandButton class="btn btn-primary" action="#{compraManagedBean.comprar(livro)}" value="Comprar" />
-                                            <a href="" class="btn btn-default detalhes-produtos" data-item="#{livroManagedBean.transformarObjetoEmJson(livro)}" role="button">Detalhes</a>
+                                            <h:commandButton class="btn btn-primary" action="#{compraManagedBean.comprar(livro)}" value="Comprar"></h:commandButton>
+                                            <h:commandButton class="btn btn-default" role="button" value="detalhes">
+                                                <f:ajax render=":modalForm" onevent="abrirModal()"  listener="#{livroManagedBean.preencherModal(livro)}"/>
+                                            </h:commandButton>
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </ui:repeat>
                     </div>
+                    <h:commandLink action="#{inicioManagedBean.inserir()}" value="teste"/>
                 </h:form>
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <h:form id="modalForm">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel"></h4>
+                                <h4 class="modal-title" id="myModalLabel">#{livroManagedBean.livroModal.titulo}</h4>
                             </div>
                             <div class="modal-body">
-
+                                <div>
+                                    <div class="lado-a-lado separacao-por-baixo20 espaco-lat-dir-10">
+                                    <h:graphicImage id="imgProdutoModal" library="images" name="#{livroManagedBean.livroModal.capa}" width="300px" height="200px" alt="..."  />
+                                    </div>
+                                    <div style="margin-bottom: 145px;">
+                                    #{livroManagedBean.livroModal.descricao}
+                                    </div>
+                                    <div style="text-align: right;">
+                                        R$#{livroManagedBean.livroModal.preco}
+                                    </div>
+                                </div>
+                                
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                            </div>
+                            <div class="modal-footer" style="clear: both">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>                            
+                            </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal-dialog -->
+                    </h:form>
                 </div><!-- /.modal -->
 
             </ui:define>

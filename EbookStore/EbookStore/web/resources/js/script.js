@@ -4,6 +4,7 @@ $(function (){
         var livro = JSON.parse($(this).attr("data-item"));
         $('#myModalLabel').text(livro.titulo);
         $('.modal-body').text(livro.descricao);
+        $('#imgModal').attr("src",livro.capa);
         $("#myModal").modal('show');
         return false;
     });
@@ -34,3 +35,8 @@ function validatePdf(arquivo) {
         }
         return true;
     } 
+    
+    function abrirModal(){
+        $('#myModal').modal('show');
+        return false;
+    }
