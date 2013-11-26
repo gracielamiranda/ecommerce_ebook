@@ -19,15 +19,16 @@
         
         <div id="top" class="top">
             <ui:insert name="top">
-                <h:form>
                 <nav class="navbar navbar-default" role="navigation">
                 <!-- Brand and toggle get grouped for better mobile display -->
+                <h:form>
                 <div class="navbar-header">
                     <h:commandLink action="#{livroManagedBean.index()}"><h:graphicImage library="images" name="ebook.png" width="70%"/></h:commandLink>
                 </div>
-
+                </h:form>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <h:form id="formHeader">
                   <ul class="nav navbar-nav menu-dropdown">
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Genêro <b class="caret"></b></a>
@@ -46,6 +47,8 @@
                         </div>
                             <h:commandButton action="#{livroManagedBean.buscar()}" class="btn btn-default" value="buscar" />
                     </div>
+                </h:form>
+                <h:form id="formCarrinho">
                   <ul class="nav navbar-nav navbar-right navegacao-direita">
                       <li>
                           <h:commandLink class="link-dropdown" action="#{usuarioManagedBean.urlAutenticado()}"> 
@@ -63,9 +66,10 @@
                           </a>
                      </li>
                   </ul>
+                </h:form>
                 </div><!-- /.navbar-collapse -->
               </nav>
-            </h:form>
+            
             </ui:insert>
         </div>
 

@@ -28,7 +28,9 @@
                                         <h:outputText value="#{livro.titulo}" /><br />
                                         <h:outputText value="R$#{livro.preco}"/>
                                         <p>
-                                            <h:commandButton class="btn btn-primary" action="#{compraManagedBean.comprar(livro)}" value="Comprar"></h:commandButton>
+                                            <h:commandButton class="btn btn-primary" value="Comprar">
+                                                <f:ajax render=":formCarrinho" listener="#{compraManagedBean.comprar(livro)}"/>
+                                            </h:commandButton>
                                             <h:commandButton class="btn btn-default" role="button" value="detalhes">
                                                 <f:ajax render=":modalForm" onevent="abrirModal()"  listener="#{livroManagedBean.preencherModal(livro)}"/>
                                             </h:commandButton>
