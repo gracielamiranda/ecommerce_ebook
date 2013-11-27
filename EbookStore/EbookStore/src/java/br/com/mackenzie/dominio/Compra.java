@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -35,7 +36,8 @@ public class Compra implements Serializable{
     @Temporal(TemporalType.TIMESTAMP)
     private Calendar dataCompra;
     
-    @OneToMany(mappedBy = "compra",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "compra_id")
     private List<ItemCompra> itemCompras;
     
     @ManyToOne(cascade = CascadeType.ALL)

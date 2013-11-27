@@ -93,15 +93,16 @@ public class CompraManagedBean implements Serializable{
                     bandeira = Bandeira.Master;
                     break;
             }
+            this.compra.setItemCompras(this.itensCompra);
             this.compra.getCartao().setBandeira(bandeira);
             this.compra.setUsuario(usuarioManagedBean.getUsuarioLogado());
             this.compra.setDataCompra(Calendar.getInstance());
             this.compraDAO.inserir(compra);
             
-            for (ItemCompra itemCompra : this.itensCompra) {
-                itemCompra.setCompra(compra);
-                this.itemCompraDAO.inserir(itemCompra);
-            }
+//            for (ItemCompra itemCompra : this.itensCompra) {
+//                itemCompra.setCompra(compra);
+//                this.itemCompraDAO.inserir(itemCompra);
+//            }
             
             this.limparCompra();
         }
